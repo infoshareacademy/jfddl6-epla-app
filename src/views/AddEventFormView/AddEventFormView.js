@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const AddEventForm = (props) => {
     <div></div>
 }
 
-export default AddEventForm 
+export default AddEventForm

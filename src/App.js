@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
+//import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
+//import DashboardView from './views/DashboardView/DashboardView'
+//import EventListView from './views/EventListView/EventListView'
+//import SingleEventView from './views/SingielEventView/SingleEventView'
 
 const App = (props) => (
   <div>
@@ -14,8 +17,9 @@ const App = (props) => (
             <li><Link to='/AddEventForm'>Add Event</Link></li>
           </ul>
         </div>
-          <Route path="/Dashboard" component={Route1} />
-          <Route path="/EventList" component={Route2} />
+          <Route path="/Dashboard" component={DashboardView} />
+          <Route path="/EventList" component={EventListView} />
+          <Route path="/EventList/SingleEvent:id" component={SingleEventView} />
           <Route path="/AddEventForm" component={AddEventForm} />
       </div>
       </Router>
