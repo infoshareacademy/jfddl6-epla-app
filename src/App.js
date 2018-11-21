@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+// import Navigation from './Navigation/Navigation'
 
 //import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
 //import DashboardView from './views/DashboardView/DashboardView'
@@ -17,10 +18,10 @@ const App = (props) => (
             <li><Link to='/AddEventForm'>Add Event</Link></li>
           </ul>
         </div>
-          <Route path="/Dashboard" component={DashboardView} />
-          <Route path="/EventList" component={EventListView} />
-          <Route path="/EventList/SingleEvent:id" component={SingleEventView} />
-          <Route path="/AddEventForm" component={AddEventForm} />
+          <Route path="/dashboard" component={DashboardView} />
+          <Route path="/event-list" component={EventListView} />
+          <Route path="/single-event/:id" component={SingleEventView} />
+          <Route path="/add-event-form" component={AddEventForm} />
       </div>
       </Router>
     </div>
