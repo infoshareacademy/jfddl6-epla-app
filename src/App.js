@@ -1,11 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-// import Navigation from './Navigation/Navigation'
-
-//import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
-//import DashboardView from './views/DashboardView/DashboardView'
-//import EventListView from './views/EventListView/EventListView'
-//import SingleEventView from './views/SingielEventView/SingleEventView'
+//import Navigation from './Navigation/Navigation'
+import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
+import DashboardView from './views/DashboardView/DashboardView'
+import EventListView from './views/EventListView/EventListView'
+import SingleEventView from './views/SingielEventView/SingleEventView'
 
 const App = (props) => (
   <div>
