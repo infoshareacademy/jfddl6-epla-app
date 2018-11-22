@@ -1,6 +1,15 @@
 import React from 'react'
 
-const EventListView = (props) => (
+class EventListView extends React.Component {
+constructor (props) {
+    super(props)
+    state  = {
+        dataSource: demoList
+    }
+}
+}
+
+    
     <div></div>
 )
 
