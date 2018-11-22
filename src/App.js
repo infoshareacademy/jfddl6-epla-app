@@ -1,31 +1,46 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import MenuItem from 'material-ui/MenuItem'
+
 import Navigation from './Navigation/Navigation'
+
 import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
 import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
-import SingleEventView from './views/SingielEventView/SingleEventView'
+import SingleEventView from './views/SingleEventView/SingleEventView'
 
 const App = (props) => (
   <div>
     <Router>
       <div>
         <div>
-          <ul>
-            <li><Link to='/Dashboard'>Home</Link></li>
-            <li><Link to='/EventList'>Event List</Link></li>
-            <li><Link to='/AddEventForm'>Add Event</Link></li>
-          </ul>
+          <Navigation title="ePla">
+            <Link to='/'>
+              <MenuItem>
+                Home
+              </MenuItem>
+            </Link>
+            <Link to='/event-list'>
+              <MenuItem>
+                Event List
+              </MenuItem>
+            </Link>
+            <Link to='/add-event-form'>
+              <MenuItem>
+                Add Event
+              </MenuItem>
+            </Link>
+          </Navigation>
         </div>
-          <Route path="/dashboard" component={DashboardView} />
+        <div>
+          <Route path="/" exact={true} component={DashboardView} />
           <Route path="/event-list" component={EventListView} />
           <Route path="/single-event/:id" component={SingleEventView} />
           <Route path="/add-event-form" component={AddEventForm} />
+        </div>
       </div>
-      </Router>
-    </div>
+    </Router>
+  </div>
 )
-
-
 
 export default App
