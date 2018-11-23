@@ -1,27 +1,37 @@
 import React from 'react';
-import { PieChart, Pie, Tooltip }  from 'recharts'
+import { PieChart, Pie, Tooltip } from 'recharts'
 
-const data = [
+const pieChartData = [
   {
-    value: 30,
-    name: 'biegi',
-    fill: "blue"
+    name: 'sports events',
+    value: 2,
+    fill: "#b71540"
   },
   {
-    value: 40,
-    name: 'inne biegi',
-    fill: "green"
-  }
+    name: 'cultural events',
+    value: 4,
+    fill: "#f6b93b"
+  },
+  {
+    name: 'music events',
+    value: 5,
+    fill: "#0a3d62"
+  },
+  {
+    name: 'religious events',
+    value: 2,
+    fill: "#079992"
+  },
 ]
 
 const DashboardPieChart = () => (
   <div >
     <PieChart width={500} height={500}>
       <Pie
-        data={data}
+        data={pieChartData}
         dataKey="value"
         nameKey="name"
-        fill="#8884d8" 
+        fill="#8884d8"
       />
       <Tooltip />
     </PieChart>
