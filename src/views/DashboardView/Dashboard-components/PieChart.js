@@ -5,22 +5,22 @@ const pieChartData = [
   {
     name: 'sports events',
     value: 2,
-    fill: "#b71540"
+    fill: "rgba(183, 21, 64, 0.8)"
   },
   {
     name: 'cultural events',
     value: 4,
-    fill: "#f6b93b"
+    fill: "rgba(246, 185, 59, 0.8)"
   },
   {
     name: 'music events',
     value: 5,
-    fill: "#0a3d62"
+    fill: "rgba(10, 61, 98, 0.8)"
   },
   {
     name: 'religious events',
     value: 2,
-    fill: "#079992"
+    fill: "rgba(7, 153, 146, 0.8)"
   },
 ]
 
@@ -36,6 +36,6 @@ const DashboardPieChart = () => (
       <Tooltip />
     </PieChart>
   </div>
-);
+)
 
 export default DashboardPieChart
