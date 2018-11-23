@@ -1,5 +1,10 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+
+const style = {
+    margin: 12,
+}
 
 class AddEventForm extends React.Component {
 
@@ -10,6 +15,9 @@ class AddEventForm extends React.Component {
         city: '',
         street: ''
     }
+
+
+
 
     render() {
         return (
@@ -38,6 +46,12 @@ class AddEventForm extends React.Component {
                     type="text"
                     floatingLabelText="Enter street name"
                     onChange={(event, newVal) => this.setState({ street: newVal })}
+                />
+                <RaisedButton
+                    label="Primary"
+                    primary={true}
+                    style={style}
+                    onClick={() => console.log(this.state)}
                 />
             </div>
         )
