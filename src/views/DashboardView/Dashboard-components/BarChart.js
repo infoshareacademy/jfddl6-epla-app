@@ -47,7 +47,7 @@ const DashboardBarChart = () => (
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="day" />
       <YAxis />
-      <Bar label={true} dataKey="partecipants"/>
+      <Bar label={{ fill: 'red', fontSize: 20 }} dataKey="partecipants"/>
     </BarChart>
   </div>
 )
