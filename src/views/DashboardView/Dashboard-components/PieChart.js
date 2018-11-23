@@ -4,18 +4,20 @@ import { PieChart, Pie, Tooltip }  from 'recharts'
 const data = [
   {
     value: 30,
-    name: 'biegi'
+    name: 'biegi',
+    fill: "blue"
   },
   {
     value: 40,
-    name: 'inne biegi'
+    name: 'inne biegi',
+    fill: "green"
   }
 ]
 
 const DashboardPieChart = () => (
   <div >
     <PieChart width={500} height={500}>
-      <Pie 
+      <Pie
         data={data}
         dataKey="value"
         nameKey="name"
