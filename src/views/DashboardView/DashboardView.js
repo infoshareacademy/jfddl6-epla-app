@@ -21,7 +21,7 @@ class DashboardView extends React.Component {
     })
 
     render() {
-        if (window.innerWidth > 770) {
+        if (window.innerWidth > 960) {
             return (
 
                 <Grid fluid>
@@ -42,18 +42,43 @@ class DashboardView extends React.Component {
                 </Grid>
             )
         }
+        else if (window.innerWidth > 760) {
+            return (
+
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12} s={12} md={12}>
+                            <Row center="xs">
+                                <DashboardPieChart
+                                    width={this.state.viewportWidth / 2}
+                                    height={this.state.viewportWidth / 2}
+                                />
+                            </Row>
+                        </Col>
+                        <Col xs={12} s={12} md={12}>
+                            <DashboardBarChart
+                                width={this.state.viewportWidth - 80}
+                                height={this.state.viewportWidth / 2 + 20}
+                            />
+                        </Col>
+                    </Row>
+                </Grid>
+            )
+        }
         else {
             return (
 
                 <Grid fluid>
                     <Row>
-                        <Col xs={12} s={6} md={6}>
-                            <DashboardPieChart
-                                width={this.state.viewportWidth - 80}
-                                height={this.state.viewportWidth - 80}
-                            />
+                        <Col xs={12} s={12} md={12}>
+                            <Row center="xs">
+                                <DashboardPieChart
+                                    width={this.state.viewportWidth - 80}
+                                    height={this.state.viewportWidth - 80}
+                                />
+                            </Row>
                         </Col>
-                        <Col xs={12} s={6} md={6}>
+                        <Col xs={12} s={12} md={12}>
                             <DashboardBarChart
                                 width={this.state.viewportWidth - 80}
                                 height={this.state.viewportWidth / 2 + 20}
