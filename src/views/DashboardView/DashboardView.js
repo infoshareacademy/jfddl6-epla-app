@@ -2,6 +2,7 @@ import React from 'react'
 import './DashBoardStyles.css'
 import DashboardPieChart from './Dashboard-components/PieChart'
 import DashboardBarChart from './Dashboard-components/BarChart'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 class DashboardView extends React.Component {
     state = {
@@ -15,19 +16,27 @@ class DashboardView extends React.Component {
         )
     }
 
-    resizeHandler = () => console.log(window.innerWidth)
+    resizeHandler = () => this.setState({
+        viewportWidth: window.innerWidth
+      })
 
     render() {
         return (
-            <div className="chartsContainer">
-                <DashboardPieChart
-                    width={this.state.viewportWidth / 2 - 50}
-                />
 
-                <DashboardBarChart
-                    width={this.state.viewportWidth / 2 - 50}
-                />
-            </div>
+             <Grid fluid>
+             <Row>
+               <Col xs={1} md={5}>
+               <DashboardPieChart
+            width={this.state.viewportWidth / 2 - 50}
+        />
+               </Col>
+               <Col xs={1} md={5}>
+               <DashboardBarChart
+            width={this.state.viewportWidth / 2 - 50}
+        />
+               </Col>
+             </Row>
+           </Grid>
         )
     }
 
