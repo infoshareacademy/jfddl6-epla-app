@@ -1,5 +1,5 @@
 import React from 'react'
-import './DashBoardStyles.css'
+// import './DashBoardStyles.css'
 import DashboardPieChart from './Dashboard-components/PieChart'
 import DashboardBarChart from './Dashboard-components/BarChart'
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -9,7 +9,7 @@ class DashboardView extends React.Component {
         viewportWidth: window.innerWidth
     }
 
-    componentDidMount(){
+    componentDidMount() {
         window.addEventListener(
             'resize',
             this.resizeHandler
@@ -18,29 +18,54 @@ class DashboardView extends React.Component {
 
     resizeHandler = () => this.setState({
         viewportWidth: window.innerWidth
-      })
+    })
 
     render() {
-        return (
+        if (window.innerWidth > 770) {
+            return (
 
-             <Grid fluid>
-             <Row>
-               <Col xs={1} md={5}>
-               <DashboardPieChart
-            width={this.state.viewportWidth / 2 - 50}
-        />
-               </Col>
-               <Col xs={1} md={5}>
-               <DashboardBarChart
-            width={this.state.viewportWidth / 2 - 50}
-        />
-               </Col>
-             </Row>
-           </Grid>
-        )
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12} s={6} md={6}>
+                            <DashboardPieChart
+                                width={this.state.viewportWidth / 2 - 50}
+                                height={this.state.viewportWidth / 2 - 40}
+                            />
+                        </Col>
+                        <Col xs={12} s={6} md={6}>
+                            <DashboardBarChart
+                                width={this.state.viewportWidth / 2 - 50}
+                                height={this.state.viewportWidth / 2}
+                            />
+                        </Col>
+                    </Row>
+                </Grid>
+            )
+        }
+        else {
+            return (
+
+                <Grid fluid>
+                    <Row>
+                        <Col xs={12} s={6} md={6}>
+                            <DashboardPieChart
+                                width={this.state.viewportWidth - 80}
+                                height={this.state.viewportWidth - 80}
+                            />
+                        </Col>
+                        <Col xs={12} s={6} md={6}>
+                            <DashboardBarChart
+                                width={this.state.viewportWidth - 80}
+                                height={this.state.viewportWidth / 2 + 20}
+                            />
+                        </Col>
+                    </Row>
+                </Grid>
+            )
+        }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         window.removeEventListener(
             'resize',
             this.resizeHandler

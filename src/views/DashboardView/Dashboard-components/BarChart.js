@@ -42,14 +42,13 @@ const barChartData = [
 ]
 
 const DashboardBarChart = (props) => (
-  <div style={{
-    alignSelf: 'flexEnd'
-  }}>
-    <h2 style={{ textAlign: 'center',
-  alignSelf: 'flexStart' }}>
+  <div>
+    <h2
+      style={{ textAlign: 'center'}}
+    >
       Events partecipants
     </h2>
-    <BarChart width={props.width} height={400} data={barChartData}>
+    <BarChart width={props.width} height={props.height} data={barChartData}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="day" />
       <YAxis />

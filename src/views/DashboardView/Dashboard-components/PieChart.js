@@ -26,11 +26,12 @@ const pieChartData = [
 
 const DashboardPieChart = (props) => (
   <div>
-    <h2 style={{ textAlign: 'center' }}>
+    <h2
+      style={{ textAlign: 'center' }}
+    >
       Events categories
     </h2>
-    <PieChart width={props.width} height={400}>
-
+    <PieChart width={props.width} height={props.height} margin={props.margin}>
       <Pie
         data={pieChartData}
         dataKey="value"
@@ -38,10 +39,10 @@ const DashboardPieChart = (props) => (
         fill="#8884d8"
       />
 
-      <Tooltip />
+      <Tooltip
+      />
 
     </PieChart>
-
   </div>
 )
 
