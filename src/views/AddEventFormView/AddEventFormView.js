@@ -2,6 +2,8 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import { database } from '../../firebase'
+
 const style = {
     margin: 12,
 }
@@ -16,7 +18,14 @@ class AddEventForm extends React.Component {
         street: ''
     }
 
+    getRandomParticipantsNumber = () =>
+        Math.round(Math.random() * 100) + 50
 
+    addToFirebase = () =>
+        database.ref('/events').push({
+            ...this.state,
+            participants: this.getRandomParticipantsNumber()
+        })
 
 
     render() {
@@ -51,7 +60,7 @@ class AddEventForm extends React.Component {
                     label="Primary"
                     primary={true}
                     style={style}
-                    onClick={() => console.log(this.state)}
+                    onClick={this.addToFirebase}
                 />
             </div>
         )
