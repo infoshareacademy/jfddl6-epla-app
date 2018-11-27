@@ -29,12 +29,17 @@ class Navigation extends React.Component {
                             this.props.children.map(child => (
                                 React.cloneElement(
                                     child,
-                                    { onClick: this.toggleDrawer }
+                                    {
+                                        onClick: this.toggleDrawer,
+                                        key: child.props[this.props.keyChildProp || 'key']
+                                    }
                                 )
                             ))
                             : React.cloneElement(
                                 this.props.children,
-                                { onClick: this.toggleDrawer }
+                                {
+                                    onClick: this.toggleDrawer,
+                                }
                             )
                         : null
                     }
