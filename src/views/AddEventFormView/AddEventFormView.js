@@ -57,7 +57,7 @@ class AddEventForm extends React.Component {
                     onChange={(event, newVal) => this.setState({ street: newVal })}
                 />
                 <RaisedButton
-                    label="Primary"
+                    label="Add event"
                     primary={true}
                     style={style}
                     onClick={this.addToFirebase}
