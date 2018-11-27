@@ -29,13 +29,13 @@ class DashboardView extends React.Component {
                         <Col xs={12} s={6} md={6}>
                             <DashboardPieChart
                                 width={this.state.viewportWidth / 2 - 50}
-                                height={this.state.viewportWidth / 2 - 40}
+                                height={this.state.viewportWidth / 2 - 80}
                             />
                         </Col>
                         <Col xs={12} s={6} md={6}>
                             <DashboardBarChart
                                 width={this.state.viewportWidth / 2 - 50}
-                                height={this.state.viewportWidth / 2}
+                                height={this.state.viewportWidth / 2 - 80}
                             />
                         </Col>
                     </Row>
