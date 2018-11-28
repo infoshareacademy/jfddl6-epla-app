@@ -1,5 +1,4 @@
 import React from 'react'
-// import './DashBoardStyles.css'
 import DashboardPieChart from './Dashboard-components/PieChart'
 import DashboardBarChart from './Dashboard-components/BarChart'
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -44,7 +43,6 @@ class DashboardView extends React.Component {
         }
         else if (window.innerWidth > 760) {
             return (
-
                 <Grid fluid>
                     <Row>
                         <Col xs={12} s={12} md={12}>
@@ -67,7 +65,6 @@ class DashboardView extends React.Component {
         }
         else {
             return (
-
                 <Grid fluid>
                     <Row>
                         <Col xs={12} s={12} md={12}>
@@ -97,6 +94,5 @@ class DashboardView extends React.Component {
         )
     }
 }
-
 
 export default DashboardView
