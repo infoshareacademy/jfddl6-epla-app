@@ -17,10 +17,10 @@ class App extends React.Component {
   }
 
   toggleNotification = (message) => {
-    this.setState(
-      { isNotificationOpen: !this.state.isNotificationOpen },
-      { notificationMessage: message || '' }
-    )
+    this.setState({
+      isNotificationOpen: !this.state.isNotificationOpen,
+      notificationMessage: message || ''
+    })
   }
 
   render() {
@@ -51,7 +51,7 @@ class App extends React.Component {
               <Route path="/" exact={true} component={DashboardView} />
               <Route path="/event-list" component={EventListView} />
               <Route path="/single-event/:id" component={SingleEventView} />
-              <Route path="/add-event-form" component={AddEventForm} />
+              <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
             </div>
           </div>
         </Router>
