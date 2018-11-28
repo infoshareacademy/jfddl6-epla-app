@@ -1,36 +1,35 @@
 import React from 'react'
-
+import List from './List'
 
 class EventListView extends React.Component {
+    state = {
+        filterText: '',
+        numberOfUsers: 150,
+        category: '',
+        events: []
+    }
 
-  state = {
-    category: '',
-    date: '',
-    city: '',
-    street: '',
-    eventName: ''
-  }
+    componentDidMount() {
+        fetch('https://epla-app.firebaseio.com/events.json')
+            .then(response => response.json())
+            .then(data => {
+                const events = Object.entries(data).map(([key, value]) => ({
+                    ...value,
+                    key
+                }))
+                this.setState({ events: events })
+            })
+    }
 
-  handleCategoryChange = (e, index, value) => this.setState({ category: value });
-  handleDateChange = (e, value) => this.setState({ date: value });
-  handleCityChange = (e, value) => this.setState({ city: value });
-  handleStreetChange = (e, value) => this.setState({ street: value });
-  handleEventNameChange = (e, value) => this.setState({ eventName: value })
+    render() {
+        return (
+            <div>
+                <List
+                    events={this.state.events} />
+            </div>
+        )
+    }
 
-  render() {
-    return (
-      <div>
-<List
-handleCategoryChange={this.handleCategoryChange}
-handleDateChangeChange={this.handleDateChange}
-handleCityChange={this.handleCityChange}
-handleStreetChange={this.handleStreetChange}
-handleEventNameChange={this.handleEventNameChange}
-/>
-
-
-      </div>
-    )
-  }
 }
+
 export default EventListView
