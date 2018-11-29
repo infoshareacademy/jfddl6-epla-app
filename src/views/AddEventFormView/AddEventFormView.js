@@ -15,7 +15,8 @@ class AddEventForm extends React.Component {
         category: '',
         date: '', //add datepicker
         city: '',
-        street: ''
+        street: '',
+        isFavourite: false
     }
 
     getRandomParticipantsNumber = () =>
@@ -41,8 +42,7 @@ class AddEventForm extends React.Component {
             category: '',
             date: '',
             city: '',
-            street: '',
-            isFavourite: false
+            street: ''
         })
     }
 
