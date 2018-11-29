@@ -13,7 +13,7 @@ class AddEventForm extends React.Component {
     state = {
         eventName: '',
         category: '',
-        date: '',
+        date: '', //add datepicker
         city: '',
         street: ''
     }
@@ -41,7 +41,8 @@ class AddEventForm extends React.Component {
             category: '',
             date: '',
             city: '',
-            street: ''
+            street: '',
+            isFavourite: false
         })
     }
 
@@ -57,13 +58,13 @@ class AddEventForm extends React.Component {
                 />
                 <TextField
                     type="text"
-                    floatingLabelText="Enter event category"
+                    floatingLabelText="Enter event category" //chaneg to dropdown menu that set string to category
                     value={this.state.category}
                     onChange={(event, newVal) => this.setState({ category: newVal })}
                 />
                 <TextField
                     type="text"
-                    floatingLabelText="Enter event date"
+                    floatingLabelText="Enter event date" // change to datepicker
                     value={this.state.date}
                     onChange={(event, newVal) => this.setState({ date: newVal })}
                 />
