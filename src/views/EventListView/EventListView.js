@@ -6,14 +6,16 @@ class EventListView extends React.Component {
     state = {
         filterText: '',
         numberOfUsers: 150,
-        category: '',
+        filterCategory: '',
         events: []
     }
 
 
-    onFilteredTextChangeHandler = (e, index, value) => this.setState({ category: value })
+    onFilteredTextChangeHandler = (e, value) => this.setState({ filterText: value })
 
-    handleUsersChange = (e, value) => this.setState({numberOfUsers: value})
+    handleUsersChange = (e, value) => this.setState({ numberOfUsers: value })
+
+    handleEventsFilterCategoryChange = (e, key, value) => this.setState({ filterCategory: value })
 
     componentDidMount() {
         fetch('https://epla-app.firebaseio.com/events.json')
@@ -32,10 +34,17 @@ class EventListView extends React.Component {
             <div>
                 <SearchForm
                     onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
-                    handleUsersChange ={this.handleUsersChange}
+                    handleUsersChange={this.handleUsersChange}
+                    handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
+                    filterCategory={this.state.filterCategory}
+                    filterText={this.state.filterText}
+                    numberOfUsers={this.state.numberOfUsers}
                 />
                 <List
                     events={this.state.events}
+                    filterCategory={this.state.filterCategory}
+                    filterText={this.state.filterText}
+                    numberOfUsers={this.state.numberOfUsers}
                 />
 
             </div>

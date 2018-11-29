@@ -21,27 +21,32 @@ const SearchForm = (props) => (
         <br />
         <TextField
             type="text"
-            placeholder="Szukaj eventów"
             fullWidth={true}
             value={props.filterText}
+            floatingLabelText="Szukaj eventów"
             onChange={props.onFilteredTextChangeHandler}
+
         />
         <br />
-        <Slider defaultValue={150}
+        <Slider
+            defaultValue={150}
+            value={props.numberOfUsers}
             onChange={props.handleUsersChange}
             sliderStyle={{ marginBottom: 0 }}
             min={0}
             max={150} />
         <br />
         <DropDownMenu
+            onChange={props.handleEventsFilterCategoryChange}
             style={DropDownMenuStyle}
             autoWidth={false}
+            value={props.filterCategory}
         >
-            <MenuItem value={''} primaryText="Wybierz Event" />
-            <MenuItem value={2} primaryText="Music" />
-            <MenuItem value={3} primaryText="Sport" />
-            <MenuItem value={4} primaryText="Cultural" />
-            <MenuItem value={5} primaryText="Religious" />
+            <MenuItem value={''} primaryText="Wszystkie" />
+            <MenuItem value={'Music'} primaryText="Music" />
+            <MenuItem value={'Sport'} primaryText="Sport" />
+            <MenuItem value={'Cultural'} primaryText="Cultural" />
+            <MenuItem value={'Religious'} primaryText="Religious" />
         </DropDownMenu >
     </Paper >
 )
