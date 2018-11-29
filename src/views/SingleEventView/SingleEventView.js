@@ -1,7 +1,10 @@
 import React from 'react'
 
 const SingleEventView = (props) => (
-    <div></div>
+    <div>
+
+        
+    </div>
 )
 
 export default SingleEventView
