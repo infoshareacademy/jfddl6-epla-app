@@ -5,6 +5,21 @@ const List = (props) => (
         {
             props.events
                 .filter(event => event.participants <= props.numberOfUsers)
+                .filter(event => (
+                    event.eventName
+                        .toLowerCase()
+                        .replace(/\s/g, '')
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .includes(
+                            props.filterText
+                                .toLowerCase()
+                                .replace(/\s/g, '')
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, "")
+                        )
+                ))
+                .filter(event => event.category === props.filterCategory)
                 .map(event =>
                     <div>
                         <li>
