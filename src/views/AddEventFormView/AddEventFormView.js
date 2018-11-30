@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
+import DatePicker from 'material-ui/DatePicker'
 
 
 import { database } from '../../firebase'
@@ -38,6 +39,7 @@ class AddEventForm extends React.Component {
     addToFirebase = () => {
         database.ref('/events').push({
             ...this.state,
+            date: this.ourDateFormatter(this.state.date),
             participants: this.getRandomParticipantsNumber()
         })
         this.setState({
@@ -49,6 +51,15 @@ class AddEventForm extends React.Component {
         })
     }
 
+    ourDateFormatter = (date) => {
+        return date.getDay() + '-' + date.getMonth() + '-' + date.getYear()
+    }
+
+    handleDateChange = (event, date) => {
+        this.setState({
+            date: date
+        })
+    }
 
     render() {
         return (
@@ -62,7 +73,7 @@ class AddEventForm extends React.Component {
                 <SelectField
                     floatingLabelText="Enter event category"
                     value={this.state.category}
-                    onChange={(event, index, newValue) => this.setState({category: newValue})}
+                    onChange={(event, index, newValue) => this.setState({ category: newValue })}
                 >
                     <MenuItem value={''} primaryText="" />
                     <MenuItem value={'Music'} primaryText="Music" />
@@ -70,12 +81,10 @@ class AddEventForm extends React.Component {
                     <MenuItem value={'Cultural'} primaryText="Cultural" />
                     <MenuItem value={'Religious'} primaryText="Religious" />
                 </SelectField>
-
-                <TextField
-                    type="text"
-                    floatingLabelText="Enter event date" // change to datepicker
+                <DatePicker
+                    hintText="Enter event date"
                     value={this.state.date}
-                    onChange={(event, newVal) => this.setState({ date: newVal })}
+                    onChange={this.handleDateChange}
                 />
                 <TextField
                     type="text"
