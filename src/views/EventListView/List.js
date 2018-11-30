@@ -19,7 +19,11 @@ const List = (props) => (
                                 .replace(/[\u0300-\u036f]/g, "")
                         )
                 ))
-                .filter(event => event.category === props.filterCategory)
+                .filter(event => {
+                    console.log(props)
+                    console.log(event)
+                    return props.filterCategory === '' ? true : event.category === props.filterCategory
+                })
                 .map(event =>
                     <div>
                         <li>
@@ -27,8 +31,10 @@ const List = (props) => (
                             <p>{event.date}</p>
                             <p>{event.city}</p>
                             <p>{event.street}</p>
+                            <button>Dodaj do ulubionych</button>
                         </li>
                     </div>)
+
         }
     </ul>
 )

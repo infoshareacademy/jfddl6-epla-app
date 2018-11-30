@@ -23,7 +23,7 @@ const SearchForm = (props) => (
             type="text"
             fullWidth={true}
             value={props.filterText}
-            floatingLabelText="Szukaj eventów"
+            floatingLabelText="Search for an event"
             onChange={props.onFilteredTextChangeHandler}
 
         />
@@ -32,9 +32,11 @@ const SearchForm = (props) => (
             defaultValue={150}
             value={props.numberOfUsers}
             onChange={props.handleUsersChange}
-            sliderStyle={{ marginBottom: 0 }}
+            sliderStyle={{ marginBottom: 15 }}
+            step={1}
             min={0}
             max={150} />
+        <span>Number of participants: {props.numberOfUsers}</span>
         <br />
         <DropDownMenu
             onChange={props.handleEventsFilterCategoryChange}
@@ -42,7 +44,7 @@ const SearchForm = (props) => (
             autoWidth={false}
             value={props.filterCategory}
         >
-            <MenuItem value={''} primaryText="Wszystkie" />
+            <MenuItem value={''} primaryText="All" />
             <MenuItem value={'Music'} primaryText="Music" />
             <MenuItem value={'Sport'} primaryText="Sport" />
             <MenuItem value={'Cultural'} primaryText="Cultural" />
