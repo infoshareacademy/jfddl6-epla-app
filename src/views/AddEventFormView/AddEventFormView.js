@@ -1,6 +1,9 @@
 import React from 'react'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+
 
 import { database } from '../../firebase'
 
@@ -56,12 +59,18 @@ class AddEventForm extends React.Component {
                     value={this.state.eventName}
                     onChange={(event, newVal) => this.setState({ eventName: newVal })}
                 />
-                <TextField
-                    type="text"
-                    floatingLabelText="Enter event category" //chaneg to dropdown menu that set string to category
+                <SelectField
+                    floatingLabelText="Enter event category"
                     value={this.state.category}
-                    onChange={(event, newVal) => this.setState({ category: newVal })}
-                />
+                    onChange={(event, index, newValue) => this.setState({category: newValue})}
+                >
+                    <MenuItem value={''} primaryText="" />
+                    <MenuItem value={'Music'} primaryText="Music" />
+                    <MenuItem value={'Sport'} primaryText="Sport" />
+                    <MenuItem value={'Cultural'} primaryText="Cultural" />
+                    <MenuItem value={'Religious'} primaryText="Religious" />
+                </SelectField>
+
                 <TextField
                     type="text"
                     floatingLabelText="Enter event date" // change to datepicker
