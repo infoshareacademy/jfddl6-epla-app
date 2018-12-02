@@ -52,6 +52,11 @@ class FavouritesView extends React.Component {
         dbRef.off()
     }
 
+    onDeleteEventClickHandler = eventKey => {
+        dbRef.child(eventKey)
+        .remove()
+    }
+
 
     render() {
         return (
@@ -70,6 +75,11 @@ class FavouritesView extends React.Component {
                                     key={`${event.eventName}+${event.date}`}
                                     title={event.eventName}
                                     subtitle={<span>Category: <b>{event.category}</b></span>}
+                                    actionIcon={<IconButton
+                                        onClick={() => this.onDeleteEventClickHandler(event.key)}
+                                    >
+                                        <StarBorder color="white" />
+                                        </IconButton>}
                                 >
                                     {
                                         event.category === "Sport" ?
@@ -77,7 +87,6 @@ class FavouritesView extends React.Component {
                                         :
                                         <img src={'https://www.publicdomainpictures.net/pictures/90000/nahled/red-scribble-heart.jpg'} />
                                     }
-                                    
                                 </GridTile>
                             ))}
                     </GridList>
