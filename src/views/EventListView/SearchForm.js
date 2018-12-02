@@ -15,51 +15,76 @@ const DropDownMenuStyle = {
     width: 300,
 }
 
+export const FontFamilyEpla = "'Capriola', sans-serif"
 
 
 const SearchForm = (props) => (
     <Paper
         style={PaperStyle}
     >
-        <br />
-        <TextField
-            type="text"
-            fullWidth={true}
-            value={props.filterText}
-            floatingLabelText="Search for an event"
-            onChange={props.onFilteredTextChangeHandler}
-        // underlineStyle={styles.underlineStyle}
+        <div>
+            <TextField
+                type="text"
+                fullWidth={true}
+                value={props.filterText}
+                floatingLabelText="Search for an event"
+                onChange={props.onFilteredTextChangeHandler}
+                style={{
+                    display: 'block',
+                    marginBottom: '5px',
+                }}
+            // underlineStyle={styles.underlineStyle}
+
+            />
+        </div>
+        <Slider
+            defaultValue={150}
+            value={props.numberOfUsers}
+            onChange={props.handleUsersChange}
+            sliderStyle={{ marginBottom: 0 }}
+            step={1}
+            min={0}
+            max={150}
+            style={{
+                fontSize: 20,
+                textAlign: "center"
+            }}
 
         />
-        <br />
-                <Slider
-                    defaultValue={150}
-                    value={props.numberOfUsers}
-                    onChange={props.handleUsersChange}
-                    sliderStyle={{ marginBottom: 20 }}
-                    step={1}
-                    min={0}
-                    max={150}
-                    style={{ fontSize: 20 }}
-                    style ={{textAlign: "center"}}
-                    />
-                <span>Number of participants: {props.numberOfUsers}</span>
+        <div 
+        style  = {{
+            fontFamily: FontFamilyEpla,
+            fontSize: 20,
+            textAlign: 'center',
+            margin: 15
+        }}
+        >
+            Number of participants: {props.numberOfUsers}
+        </div>
+        <div>
+            <DropDownMenu
+                onChange={props.handleEventsFilterCategoryChange}
+                autoWidth={false}
+                style={{
+                    DropDownMenuStyle,
+                    width: '100%',
+                    fontSize: 25,
+                    fontFamily: FontFamilyEpla,
+                    textAlign: 'center',
+                }}
+                menuStyle={{
+                    textAlign: "center",
+                }}
+                value={props.filterCategory}
+            >
+                <MenuItem value={''} primaryText="All" />
+                <MenuItem value={'Music'} primaryText="Music" />
+                <MenuItem value={'Sport'} primaryText="Sport" />
+                <MenuItem value={'Cultural'} primaryText="Cultural" />
+                <MenuItem value={'Religious'} primaryText="Religious" />
+            </DropDownMenu >
             <br />
-                <DropDownMenu
-                    onChange={props.handleEventsFilterCategoryChange}
-                    style={DropDownMenuStyle}
-                    autoWidth={false}
-                    style={{ width: '100%' }}
-                    style={{ fontSize: 20 }}
-                    value={props.filterCategory}
-                >
-                    <MenuItem value={''} primaryText="All" />
-                    <MenuItem value={'Music'} primaryText="Music" />
-                    <MenuItem value={'Sport'} primaryText="Sport" />
-                    <MenuItem value={'Cultural'} primaryText="Cultural" />
-                    <MenuItem value={'Religious'} primaryText="Religious" />
-                </DropDownMenu >
-
+        </div>
     </Paper>
 )
 

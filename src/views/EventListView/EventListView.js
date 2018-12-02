@@ -1,8 +1,20 @@
 import React from 'react'
 import List from './List'
 import SearchForm from './SearchForm'
-import Paper from 'material-ui/Paper'
-import { GridList, GridTile } from 'material-ui/GridList';
+import { GridList } from 'material-ui/GridList'
+
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    gridList: {
+        width: 500,
+        height: 450,
+    },
+};
 
 
 
@@ -11,7 +23,8 @@ class EventListView extends React.Component {
         filterText: '',
         numberOfUsers: 150,
         filterCategory: '',
-        events: []
+        events: [],
+        cols: 2
     }
 
 
@@ -36,25 +49,29 @@ class EventListView extends React.Component {
     render() {
         return (
             <div>
-                <Paper>
-                    <SearchForm
-                        onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
-                        handleUsersChange={this.handleUsersChange}
-                        handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
+                <SearchForm
+                    onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
+                    handleUsersChange={this.handleUsersChange}
+                    handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
+                    filterCategory={this.state.filterCategory}
+                    filterText={this.state.filterText}
+                    numberOfUsers={this.state.numberOfUsers}
+                />
+
+                <GridList
+                    cellHeight={180}
+                    style={styles.gridList}
+                    cols={this.state.cols}
+                    padding={12}
+                >
+                    <List
+                        events={this.state.events}
                         filterCategory={this.state.filterCategory}
                         filterText={this.state.filterText}
                         numberOfUsers={this.state.numberOfUsers}
                     />
-                    <GridList>
 
-                        <List
-                            events={this.state.events}
-                            filterCategory={this.state.filterCategory}
-                            filterText={this.state.filterText}
-                            numberOfUsers={this.state.numberOfUsers}
-                        />
-                    </GridList>
-                </Paper>
+                </GridList>
             </div >
         )
     }
