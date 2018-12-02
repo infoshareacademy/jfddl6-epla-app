@@ -16,8 +16,8 @@ class SingleEventView extends React.Component {
 
 
     componentDidMount() {
-        const key = this.props.match.params.key;
-        database.ref(`/events/${key}`)
+        // const key = this.props.match.params.key;
+        database.ref(`/events/-LSj8eFsFjHkEyFFj4cu`)
             .on('value', (snapshot) => {
                 this.setState({
                     data: snapshot.val()
@@ -25,18 +25,17 @@ class SingleEventView extends React.Component {
             })
     }
 
-    ifIsFavouriteText = () => {
-        if (!this.state.data) return
-        console.log(<h3>Teraz sie wyswietla</h3>)
-    }
 
+    toggleFavourite = () => {
+        return (
+        console.log('togggle!'),
 
-    toggleFavorite = () => {
-        if (!this.state.data) return
+        // if (!this.state.data) return
 
-        database.ref(`/products/${this.props.match.params.key}`).update({
-            isFavorite: !this.state.data.isFavorite
+        database.ref(`/products/-LSj8eFsFjHkEyFFj4cu`).update({
+            isFavourite: !this.state.data.isFavourite
         })
+        )
     }
 
     render() {
@@ -51,7 +50,10 @@ class SingleEventView extends React.Component {
                             <h3>Date: {this.state.data && this.state.data.date}</h3>
                             <h3>Numbers of participants: {this.state.data && this.state.data.participants}</h3>
                             <h3>Street adress: {this.state.data && this.state.data.street}</h3>
-                            <CheckboxFavourite />
+                            <CheckboxFavourite
+                                toggleFavourite={this.toggleFavourite}
+                                onChange={() => console.log('222')}
+                            />
                         </Col>
                         <Col xs={12} s={6} md={6}>
                             <img
@@ -65,7 +67,7 @@ class SingleEventView extends React.Component {
                         </Col>
                     </Row>
                 </Grid>
-            </Paper>
+            </Paper >
         )
     }
 }

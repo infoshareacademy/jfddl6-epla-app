@@ -1,6 +1,5 @@
 import React from 'react';
 import Checkbox from 'material-ui/Checkbox';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
 const styles = {
@@ -17,6 +16,10 @@ class CheckboxFavourite extends React.Component {
         checked: false,
     }
 
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.checked });
+      }
+
     updateCheck() {
         this.setState((oldState) => {
             return {
@@ -31,22 +34,25 @@ class CheckboxFavourite extends React.Component {
                 style={styles.block}
             >
                 <Checkbox
-                    checkedIcon={<ActionFavoriteBorder 
-                    style={{
-                        backgroundColor: '#eb2f06'
-                    }}
+                    defaultChecked={false}
+                    checkedIcon={<ActionFavoriteBorder
+                        style={{
+                            backgroundColor: '#eb2f06'
+                        }}
                     />}
                     uncheckedIcon={<ActionFavoriteBorder
                         style={{
                             backgroundColor: '#3c6382'
                         }}
                     />}
-                    label="Custom icon"
+                    label="Add to favourite: "
                     labelPosition="left"
+                    labelStyle={{
+                        fontSize: "18px",
+                        fontWeight: "bold"
+                    }}
                     style={styles.checkbox}
-                    // iconStyle={{
-                    //     backgroundColor: '#0a3d62'
-                    // }}
+                    onChange={() => this.handleChange}
                 />
             </div>
         );
