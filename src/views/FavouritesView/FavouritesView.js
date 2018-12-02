@@ -14,8 +14,8 @@ const styles = {
         justifyContent: 'space-around',
     },
     gridList: {
-        width: 500,
-        height: 450,
+        width: 1000,
+        height: 900,
         overflowY: 'auto',
     },
 }
@@ -55,7 +55,8 @@ class FavouritesView extends React.Component {
     onDeleteEventClickHandler = eventKey => {
         dbRef.child(eventKey)
         .update({
-            isFavourite: false})
+            isFavourite: false
+        })
     }
 
   
@@ -66,7 +67,7 @@ class FavouritesView extends React.Component {
             <div>
                 <div style={styles.root}>
                     <GridList
-                        cellHeight={180}
+                        cellHeight={360}
                         style={styles.gridList}
                     >
                         <Subheader>Favourites List</Subheader>
