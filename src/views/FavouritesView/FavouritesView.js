@@ -75,7 +75,7 @@ class FavouritesView extends React.Component {
                         {this.state.data.filter(event => event.isFavourite === true)
                             .map((event) => (
                                 <GridTile
-                                    key={`${event.eventName}+${event.date}`}
+                                    key={event.key}
                                     title={event.eventName}
                                     subtitle={<span>Category: <b>{event.category}</b></span>}
                                     actionIcon={<IconButton
