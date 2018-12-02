@@ -1,6 +1,9 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
+import { database } from '../../firebase'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import IconButton from 'material-ui/IconButton'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 class SingleEventView extends React.Component {
 
@@ -19,7 +22,11 @@ class SingleEventView extends React.Component {
                             <h3>Event Category: cultural</h3>
                             <h3>Date:</h3>
                             <h3>Numbers of participants:</h3>
-                            <h3>Add to favourites: </h3>
+                            <h3>Add to favourites: 
+                                <IconButton>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </h3>
                         </Col>
                         <Col xs={12} s={6} md={6}>
                             <img
