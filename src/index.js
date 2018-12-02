@@ -5,10 +5,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import './index.css'
 import App from './App'
-import eplaTheme from './style'
+/*import eplaTheme from './style'*/
 
 ReactDOM.render(
-    <MuiThemeProvider muiTheme={eplaTheme}>
+    <MuiThemeProvider /*muiTheme={eplaTheme}*/>
         <App />
     </MuiThemeProvider>,
     document.getElementById('root')
