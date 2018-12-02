@@ -54,8 +54,11 @@ class FavouritesView extends React.Component {
 
     onDeleteEventClickHandler = eventKey => {
         dbRef.child(eventKey)
-        .remove()
+        .update({
+            isFavourite: false})
     }
+
+  
 
 
     render() {
@@ -79,13 +82,13 @@ class FavouritesView extends React.Component {
                                         onClick={() => this.onDeleteEventClickHandler(event.key)}
                                     >
                                         <StarBorder color="white" />
-                                        </IconButton>}
+                                    </IconButton>}
                                 >
                                     {
                                         event.category === "Sport" ?
-                                        <img src={'https://cdn.prod-carehubs.net/n1/802899ec472ea3d8/uploads/2017/02/a-watercolor-graphic-of-a-heart-in-pinks-and-purples-special-crop-1024x864.jpg'} />
-                                        :
-                                        <img src={'https://www.publicdomainpictures.net/pictures/90000/nahled/red-scribble-heart.jpg'} />
+                                            <img src={'https://cdn.prod-carehubs.net/n1/802899ec472ea3d8/uploads/2017/02/a-watercolor-graphic-of-a-heart-in-pinks-and-purples-special-crop-1024x864.jpg'} />
+                                            :
+                                            <img src={'https://www.publicdomainpictures.net/pictures/90000/nahled/red-scribble-heart.jpg'} />
                                     }
                                 </GridTile>
                             ))}
