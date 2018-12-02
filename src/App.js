@@ -8,7 +8,7 @@ import AddEventForm from './views/AddEventFormView/AddEventFormView.js'
 import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
 import SingleEventView from './views/SingleEventView/SingleEventView'
-
+import FavouritesView from './views/FavouritesView/FavouritesView'
 class App extends React.Component {
 
   state = {
@@ -47,6 +47,11 @@ class App extends React.Component {
                     Add Event
               </MenuItem>
                 </Link>
+                <Link to='/favourites'>
+                  <MenuItem>
+                    Favourites List
+              </MenuItem>
+                </Link>
               </Navigation>
             </div>
             <div>
@@ -54,6 +59,7 @@ class App extends React.Component {
               <Route path="/event-list" component={EventListView} />
               <Route path="/single-event/:id" component={SingleEventView} />
               <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
+              <Route path="/favourites" component={FavouritesView} />
             </div>
           </div>
         </Router>
