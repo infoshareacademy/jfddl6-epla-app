@@ -1,6 +1,10 @@
 import React from 'react'
 import List from './List'
 import SearchForm from './SearchForm'
+import Paper from 'material-ui/Paper'
+import { GridList, GridTile } from 'material-ui/GridList';
+
+
 
 class EventListView extends React.Component {
     state = {
@@ -32,22 +36,26 @@ class EventListView extends React.Component {
     render() {
         return (
             <div>
-                <SearchForm
-                    onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
-                    handleUsersChange={this.handleUsersChange}
-                    handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
-                    filterCategory={this.state.filterCategory}
-                    filterText={this.state.filterText}
-                    numberOfUsers={this.state.numberOfUsers}
-                />
-                <List
-                    events={this.state.events}
-                    filterCategory={this.state.filterCategory}
-                    filterText={this.state.filterText}
-                    numberOfUsers={this.state.numberOfUsers}
-                />
+                <Paper>
+                    <SearchForm
+                        onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
+                        handleUsersChange={this.handleUsersChange}
+                        handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
+                        filterCategory={this.state.filterCategory}
+                        filterText={this.state.filterText}
+                        numberOfUsers={this.state.numberOfUsers}
+                    />
+                    <GridList>
 
-            </div>
+                        <List
+                            events={this.state.events}
+                            filterCategory={this.state.filterCategory}
+                            filterText={this.state.filterText}
+                            numberOfUsers={this.state.numberOfUsers}
+                        />
+                    </GridList>
+                </Paper>
+            </div >
         )
     }
 
