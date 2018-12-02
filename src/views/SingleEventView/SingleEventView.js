@@ -2,22 +2,31 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import { database } from '../../firebase'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import IconButton from 'material-ui/IconButton'
+import ActionFavorite from 'material-ui/svg-icons/action/favorite'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
-import CheckboxFavourite from './CheckboxFavourite'
 
 class SingleEventView extends React.Component {
 
     state = {
         viewportWidth: window.innerWidth,
-        data: null
+        data: null,
+        events: []
     }
 
 
-
-
     componentDidMount() {
-        // const key = this.props.match.params.key;
-        database.ref(`/events/-LSj8eFsFjHkEyFFj4cu`)
+        this.loadData()
+
+    }
+    
+    componentWillUnmount() {
+        database.ref('/events/-LS_KYvXqU1hmJe7W4we').off()
+    }
+
+    loadData = () => {
+        database.ref('/events/-LSj8eFsFjHkEyFFj4cu')
             .on('value', (snapshot) => {
                 this.setState({
                     data: snapshot.val()
@@ -25,17 +34,11 @@ class SingleEventView extends React.Component {
             })
     }
 
-
-    toggleFavourite = () => {
-        return (
-        console.log('togggle!'),
-
-        // if (!this.state.data) return
-
-        database.ref(`/products/-LSj8eFsFjHkEyFFj4cu`).update({
-            isFavourite: !this.state.data.isFavourite
-        })
-        )
+    isfavourite = () => {
+        fetch('https:epla-app.firebaseio.com/events/-LSj8eFsFjHkEyFFj4cu.json', {
+            method: 'PATCH',
+            body: JSON.stringify({ isFavourite: !this.state.data.isFavourite })
+        }).then(() => this.loadData())
     }
 
     render() {
@@ -50,10 +53,17 @@ class SingleEventView extends React.Component {
                             <h3>Date: {this.state.data && this.state.data.date}</h3>
                             <h3>Numbers of participants: {this.state.data && this.state.data.participants}</h3>
                             <h3>Street adress: {this.state.data && this.state.data.street}</h3>
-                            <CheckboxFavourite
-                                toggleFavourite={this.toggleFavourite}
-                                onChange={() => console.log('222')}
-                            />
+                            <h3>Add to favourites:
+                            <IconButton
+                                onClick={this.isfavourite}
+                            >
+                                {this.state.data && this.state.data.isFavourite ?
+                                    <ActionFavorite />
+                                    :
+                                    <ActionFavoriteBorder />
+                                }
+                            </IconButton>
+                            </h3>
                         </Col>
                         <Col xs={12} s={6} md={6}>
                             <img
