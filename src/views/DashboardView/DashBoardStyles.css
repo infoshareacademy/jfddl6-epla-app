@@ -1,0 +1,15 @@
+.chartsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.DashboardPieChart {
+width: 40vw;
+}
+
+.DashboardBarChart {
+width: 40vw;
+}
+

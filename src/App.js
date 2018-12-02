@@ -29,7 +29,9 @@ class App extends React.Component {
         <Router>
           <div>
             <div>
-              <Navigation title="ePla">
+              <Navigation
+              title="ePla"
+            keyChildProp="to">
                 <Link to='/'>
                   <MenuItem>
                     Home
