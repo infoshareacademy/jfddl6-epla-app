@@ -48,47 +48,41 @@ class FavouritesView extends React.Component {
         )
     }
 
+    componentWillUnmount() {
+        dbRef.off()
+    }
+
 
     render() {
         return (
             <div>
-            <div>
-                {
-                    this.state.data.filter(event => event.isFavourite === true)
-                        .map(event =>
-                            <div>
-                                <li>
-                                    <p>{event.eventName}</p>
-                                    <p>{event.date}</p>
-                                    <p>{event.city}</p>
-                                    <p>{event.street}</p>
-                                </li>
-                            </div>)
-                }
+                <div style={styles.root}>
+                    <GridList
+                        cellHeight={180}
+                        style={styles.gridList}
+                    >
+                        <Subheader>Favourites List</Subheader>
+
+
+                        {this.state.data.filter(event => event.isFavourite === true)
+                            .map((event) => (
+                                <GridTile
+                                    key={`${event.eventName}+${event.date}`}
+                                    title={event.eventName}
+                                    subtitle={<span>Category: <b>{event.category}</b></span>}
+                                >
+                                    {
+                                        event.category === "Sport" ?
+                                        <img src={'https://cdn.prod-carehubs.net/n1/802899ec472ea3d8/uploads/2017/02/a-watercolor-graphic-of-a-heart-in-pinks-and-purples-special-crop-1024x864.jpg'} />
+                                        :
+                                        <img src={'https://www.publicdomainpictures.net/pictures/90000/nahled/red-scribble-heart.jpg'} />
+                                    }
+                                    
+                                </GridTile>
+                            ))}
+                    </GridList>
+                </div>
             </div>
-
-            <div style={styles.root}>
-                <GridList
-                    cellHeight={180}
-                    style={styles.gridList}
-                >
-                    <Subheader>Favourites List</Subheader>
-
-
-                    {this.state.data.filter(event => event.isFavourite === true)
-                        .map((event) => (
-                        <GridTile
-                        key={`${event.eventName}+${event.date}`}
-                            title={event.eventName}
-                            subtitle={<span>Category: <b>{event.category}</b></span>}
-                            
-                        >
-                            <img src={'https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg'} />
-                        </GridTile>
-                    ))}
-                </GridList>
-            </div>
-</div>
         )
     }
 }
