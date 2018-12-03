@@ -16,6 +16,7 @@ const DropDownMenuStyle = {
 }
 
 export const FontFamilyEpla = "'Capriola', sans-serif"
+export const red800 = '#c62828';
 
 
 const SearchForm = (props) => (
@@ -32,9 +33,10 @@ const SearchForm = (props) => (
                 style={{
                     display: 'block',
                     marginBottom: '5px',
+                    fontFamily: FontFamilyEpla,
+                    fontSize: 20,
+                    margin: 15
                 }}
-            // underlineStyle={styles.underlineStyle}
-
             />
         </div>
         <Slider
@@ -51,13 +53,13 @@ const SearchForm = (props) => (
             }}
 
         />
-        <div 
-        style  = {{
-            fontFamily: FontFamilyEpla,
-            fontSize: 20,
-            textAlign: 'center',
-            margin: 15
-        }}
+        <div
+            style={{
+                fontFamily: FontFamilyEpla,
+                fontSize: 20,
+                textAlign: 'center',
+                margin: 15
+            }}
         >
             Number of participants: {props.numberOfUsers}
         </div>
@@ -75,6 +77,8 @@ const SearchForm = (props) => (
                 menuStyle={{
                     textAlign: "center",
                 }}
+                menuItemStyle={{ fontFamily: FontFamilyEpla}}
+                selectedMenuItemStyle={{ color: red800}}
                 value={props.filterCategory}
             >
                 <MenuItem value={''} primaryText="All" />

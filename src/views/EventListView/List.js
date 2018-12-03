@@ -1,5 +1,7 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
+import { FontFamilyEpla } from './SearchForm';
+
 
 const List = (props) => (
     <ul>
@@ -42,7 +44,7 @@ const List = (props) => (
                                         style={{
                                             width: 500,
                                             flexWrap: 'wrap',
-                                            justifyContent: 'space-around',
+                                            justifyContent: 'space-evenly',
                                         }}
                                     />
                                     :
@@ -62,15 +64,21 @@ const List = (props) => (
                                                 />
                                                 : false
                             }
+                            <div
+                            style={{
+                                fontFamily:FontFamilyEpla,
+                                fontSize: 20
 
+                            }}
+                            >
 
-                            <p> {event.eventName}</p>
-                            <p>{event.date}</p>
-                            <p>{event.city}</p>
-                            <p>{event.street}</p>
-                            <button>Dodaj do ulubionych</button>
+                                <p> {event.eventName}</p>
+                                <p>{event.date}</p>
+                                <p>{event.city}</p>
+                                <p>{event.street}</p>
+                                <button>Dodaj do ulubionych</button>
 
-
+                            </div>
 
 
                         </Paper>
