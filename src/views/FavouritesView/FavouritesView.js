@@ -3,6 +3,7 @@ import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import Subheader from 'material-ui/Subheader'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 
 import { database } from '../../firebase'
@@ -20,7 +21,6 @@ const styles = {
     },
 }
 
-
 const dbRef = database.ref('/events')
 
 class FavouritesView extends React.Component {
@@ -28,8 +28,6 @@ class FavouritesView extends React.Component {
     state = {
         data: []
     }
-
-
 
     componentDidMount() {
         dbRef.on(
@@ -59,22 +57,19 @@ class FavouritesView extends React.Component {
         })
     }
 
-  
-
-
     render() {
         return (
             <div>
                 <div style={styles.root}>
+                <Router>
                     <GridList
                         cellHeight={360}
                         style={styles.gridList}
                     >
                         <Subheader>Favourites List</Subheader>
-
-
                         {this.state.data.filter(event => event.isFavourite === true)
                             .map((event) => (
+                                <Link to ={`/single-event/:${event.key}`}>
                                 <GridTile
                                     key={event.key}
                                     title={event.eventName}
@@ -92,8 +87,10 @@ class FavouritesView extends React.Component {
                                             <img src={'https://www.publicdomainpictures.net/pictures/90000/nahled/red-scribble-heart.jpg'} />
                                     }
                                 </GridTile>
+                                </Link>
                             ))}
                     </GridList>
+                    </Router>
                 </div>
             </div>
         )
