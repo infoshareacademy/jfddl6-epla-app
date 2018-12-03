@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import './index.css'
+import App from './App'
+/*import eplaTheme from './style'*/
+
 ReactDOM.render(
-    <MuiThemeProvider>
+    <MuiThemeProvider /*muiTheme={eplaTheme}*/>
         <App />
     </MuiThemeProvider>,
     document.getElementById('root')
