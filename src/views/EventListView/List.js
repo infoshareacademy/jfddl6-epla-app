@@ -4,10 +4,13 @@ import { FontFamilyEpla } from './SearchForm'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
+import { Link } from 'react-router-dom'
 
 
 const List = (props) => (
+
     <ul>
+
         {
             props.events
                 .filter(event => event.participants <= props.numberOfUsers)
@@ -53,50 +56,58 @@ const List = (props) => (
                                     :
                                     event.category === "Sport" ?
                                         <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Sport"
-                                            style={{ 
+                                            style={{
                                                 width: 500,
                                                 borderRadius: 50
-                                             }}
+                                            }}
                                         />
                                         :
                                         event.category === "Cultural" ?
                                             <img src="https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Cultural"
-                                                style={{ 
+                                                style={{
                                                     width: 500,
                                                     borderRadius: 50
-                                                 }}
+                                                }}
                                             />
                                             :
                                             event.category === "Religious" ?
                                                 <img src="https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Religious"
-                                                    style={{ 
+                                                    style={{
                                                         width: 500,
                                                         borderRadius: 50
-                                                     }}
+                                                    }}
                                                 />
                                                 : false
                             }
                             <div
-                            style={{
-                                fontFamily:FontFamilyEpla,
-                                fontSize: 20
+                                style={{
+                                    fontFamily: FontFamilyEpla,
+                                    fontSize: 20
 
-                            }}
+                                }}
                             >
+                                <Link to={`/single-event/${event.key}`}>
+                                    <p
+                                        style={{
 
-                                <p> {event.eventName}</p>
+                                            textDecoration: 'none',
+
+
+                                        }}
+                                    > {event.eventName}</p>
+                                </Link>
                                 <p>{event.date}</p>
                                 <p>{event.city}</p>
                                 <p>{event.street}</p>
                                 <IconButton
-                                onClick={() => props.isFavourite(event)}
-                            >
-                                {event.isFavourite ?
-                                    <ActionFavorite />
-                                    :
-                                    <ActionFavoriteBorder />
-                                }
-                            </IconButton>
+                                    onClick={() => props.isFavourite(event)}
+                                >
+                                    {event.isFavourite ?
+                                        <ActionFavorite />
+                                        :
+                                        <ActionFavoriteBorder />
+                                    }
+                                </IconButton>
 
                             </div>
 
@@ -106,6 +117,7 @@ const List = (props) => (
                 })
 
         }
+
     </ul>
 )
 
