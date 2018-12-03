@@ -22,11 +22,11 @@ class SingleEventView extends React.Component {
     }
     
     componentWillUnmount() {
-        database.ref('/events/-LS_KYvXqU1hmJe7W4we').off()
+        database.ref('/events/-LSkhqgnUxL_PlA_QbY2').off()
     }
 
     loadData = () => {
-        database.ref('/events/-LSj8eFsFjHkEyFFj4cu')
+        database.ref('/events/-LSkhqgnUxL_PlA_QbY2')
             .on('value', (snapshot) => {
                 this.setState({
                     data: snapshot.val()
@@ -34,12 +34,12 @@ class SingleEventView extends React.Component {
             })
     }
 
-    // isfavourite = () => {
-    //     fetch('https:epla-app.firebaseio.com/events/-LSj8eFsFjHkEyFFj4cu.json', {
-    //         method: 'PATCH',
-    //         body: JSON.stringify({ isFavourite: !this.state.data.isFavourite })
-    //     }).then(() => this.loadData())
-    // }
+    isfavourite = () => {
+        fetch('https:epla-app.firebaseio.com/events/-LSkhqgnUxL_PlA_QbY2.json', {
+            method: 'PATCH',
+            body: JSON.stringify({ isFavourite: !this.state.data.isFavourite })
+        }).then(() => this.loadData())
+     }
 
     render() {
         return (

@@ -38,7 +38,7 @@ const App = (props) => (
         <div>
           <Route path="/" exact={true} component={DashboardView} />
           <Route path="/event-list" component={EventListView} />
-          <Route path="/-LSj8eFsFjHkEyFFj4cu" component={SingleEventView} />    {/* dodaj pozniej do scizki /:id */}
+          <Route path="/single-event/:-LSj8eFsFjHkEyFFj4cu" component={SingleEventView} />    {/* dodaj pozniej do scizki /:id */}
           <Route path="/add-event-form" component={AddEventForm} />
         </div>
       </div>
