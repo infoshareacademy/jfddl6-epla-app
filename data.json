@@ -1,0 +1,38 @@
+[
+{
+    "category": "music",
+    "date": "16.02.2018",
+    "city": "Lublin",
+    "street": "Krasińskiego",
+    "eventName": "Wu-Tang Clan Concert"
+},
+
+{
+    "category": "music",
+    "date": "09.07.2018",
+    "city": "Lublin",
+    "street": "Orłowicza",
+    "eventName": "Leszek Możdzer Concert"
+},
+
+{
+    "category": "Theatre",
+    "date": "13.12.2018",
+    "city": "Warsaw",
+    "street": "Karłowicza",
+    "eventName": "Makbet"
+},
+
+{
+    "category": "Film",
+    "date": "09.02.2019",
+    "city": "Lublin",
+    "street": "Ametystowa",
+    "eventName": "Wściekłe pięści węża"
+}
+
+
+
+
+
+]
