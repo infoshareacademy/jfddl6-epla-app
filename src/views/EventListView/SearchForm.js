@@ -4,11 +4,13 @@ import Paper from 'material-ui/Paper'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Slider from 'material-ui/Slider'
+import { white } from 'material-ui/styles/colors';
 
 
 const PaperStyle = {
     margin: 15,
-    padding: 10
+    padding: 10,
+    backgroundColor:white
 }
 
 const DropDownMenuStyle = {

@@ -1,6 +1,9 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { FontFamilyEpla } from './SearchForm';
+import { FontFamilyEpla } from './SearchForm'
+import IconButton from 'material-ui/IconButton'
+import ActionFavorite from 'material-ui/svg-icons/action/favorite'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
 
 const List = (props) => (
@@ -23,18 +26,17 @@ const List = (props) => (
                         )
                 ))
                 .filter(event => {
-                    console.log(props)
-                    console.log(event)
                     return props.filterCategory === '' ? true : event.category === props.filterCategory
                 })
                 .map(event => {
                     return (
                         <Paper
                             style={{
-                                margin: 15,
+                                margin: "15px auto",
                                 padding: 10,
                                 width: 1500,
                                 textAlign: 'center',
+                                backgroundColor: 'white'
                             }}
                         >
 
@@ -43,6 +45,7 @@ const List = (props) => (
                                     <img src="https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Music"
                                         style={{
                                             width: 500,
+                                            borderRadius: 50,
                                             flexWrap: 'wrap',
                                             justifyContent: 'space-evenly',
                                         }}
@@ -50,17 +53,26 @@ const List = (props) => (
                                     :
                                     event.category === "Sport" ?
                                         <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Sport"
-                                            style={{ width: 500 }}
+                                            style={{ 
+                                                width: 500,
+                                                borderRadius: 50
+                                             }}
                                         />
                                         :
                                         event.category === "Cultural" ?
                                             <img src="https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Cultural"
-                                                style={{ width: 500 }}
+                                                style={{ 
+                                                    width: 500,
+                                                    borderRadius: 50
+                                                 }}
                                             />
                                             :
                                             event.category === "Religious" ?
                                                 <img src="https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Religious"
-                                                    style={{ width: 500 }}
+                                                    style={{ 
+                                                        width: 500,
+                                                        borderRadius: 50
+                                                     }}
                                                 />
                                                 : false
                             }
@@ -76,7 +88,15 @@ const List = (props) => (
                                 <p>{event.date}</p>
                                 <p>{event.city}</p>
                                 <p>{event.street}</p>
-                                <button>Dodaj do ulubionych</button>
+                                <IconButton
+                                onClick={() => props.isFavourite(event)}
+                            >
+                                {event.isFavourite ?
+                                    <ActionFavorite />
+                                    :
+                                    <ActionFavoriteBorder />
+                                }
+                            </IconButton>
 
                             </div>
 

@@ -1,22 +1,8 @@
 import React from 'react'
 import List from './List'
 import SearchForm from './SearchForm'
-import { GridList } from 'material-ui/GridList'
 import Paper from 'material-ui/Paper'
-import { black } from 'material-ui/styles/colors';
 
-
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    gridList: {
-        width: 500,
-        height: 450,
-    },
-};
 
 
 
@@ -36,7 +22,18 @@ class EventListView extends React.Component {
 
     handleEventsFilterCategoryChange = (e, key, value) => this.setState({ filterCategory: value })
 
+    isFavourite = (event) => {
+        fetch(`https:epla-app.firebaseio.com/events/${event.key}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify({ isFavourite: !event.isFavourite })
+        }).then(() => this.loadData())
+    }
+
     componentDidMount() {
+        this.loadData()
+    }
+
+    loadData = () => {
         fetch('https://epla-app.firebaseio.com/events.json')
             .then(response => response.json())
             .then(data => {
@@ -59,29 +56,17 @@ class EventListView extends React.Component {
                     filterText={this.state.filterText}
                     numberOfUsers={this.state.numberOfUsers}
                 />
-                <Paper
-                    style={{
-                        flexDirection: "row",
-                        flexGrow: 1,
-                        backgroundColor: black,
-                        flexDirection: "column"
-                    }}
-                >
-                    {/* <GridList
-                        cellHeight={180}
-                        style={styles.gridList}
-                        cols={this.state.cols}
-                        padding={12}
-                    > */}
-                    {/* --------------------- do sprawdznia!!!!!!! */}
-                        <List
-                            events={this.state.events}
-                            filterCategory={this.state.filterCategory}
-                            filterText={this.state.filterText}
-                            numberOfUsers={this.state.numberOfUsers}
-                        />
+                <Paper >
 
-                    {/* </GridList> */}
+                    <List
+                        events={this.state.events}
+                        filterCategory={this.state.filterCategory}
+                        filterText={this.state.filterText}
+                        numberOfUsers={this.state.numberOfUsers}
+                        isFavourite={this.isFavourite}
+                    />
+
+
                 </Paper>
             </div >
         )
