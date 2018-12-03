@@ -34,12 +34,12 @@ class SingleEventView extends React.Component {
             })
     }
 
-    isfavourite = () => {
-        fetch('https:epla-app.firebaseio.com/events/-LSj8eFsFjHkEyFFj4cu.json', {
-            method: 'PATCH',
-            body: JSON.stringify({ isFavourite: !this.state.data.isFavourite })
-        }).then(() => this.loadData())
-    }
+    // isfavourite = () => {
+    //     fetch('https:epla-app.firebaseio.com/events/-LSj8eFsFjHkEyFFj4cu.json', {
+    //         method: 'PATCH',
+    //         body: JSON.stringify({ isFavourite: !this.state.data.isFavourite })
+    //     }).then(() => this.loadData())
+    // }
 
     render() {
         return (
