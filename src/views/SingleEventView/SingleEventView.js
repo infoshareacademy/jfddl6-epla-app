@@ -21,7 +21,6 @@ class SingleEventView extends React.Component {
 
     componentDidMount() {
         this.loadData()
-        console.log(this.state.data)
 
     }
 
