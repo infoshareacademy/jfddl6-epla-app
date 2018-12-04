@@ -73,7 +73,6 @@ class AddEventForm extends React.Component {
         })
     }
 
-
     handleCategorySelectChange = (event, index, newValue) => {
         console.log(newValue,this.state.category)
         this.setState({ category: newValue, photo: mapImageSourceToCategory[newValue]})
