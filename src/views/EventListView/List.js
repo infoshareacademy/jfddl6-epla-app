@@ -5,11 +5,29 @@ import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
+import { GridList, GridTile } from 'material-ui/GridList'
+
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    gridList: {
+        width: 1000,
+        height: 900,
+        overflowY: 'auto',
+    },
+}
 
 
 const List = (props) => (
 
-    <ul>
+    <GridList
+    cellHeight={500}
+    style={styles.gridList}
+>
 
         {
             props.events
@@ -118,7 +136,7 @@ const List = (props) => (
 
         }
 
-    </ul>
+    </GridList>
 )
 
 export default List
