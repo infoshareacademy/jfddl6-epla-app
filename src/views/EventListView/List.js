@@ -5,30 +5,20 @@ import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
-import { GridList, GridTile } from 'material-ui/GridList'
-
-
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    gridList: {
-        width: 1000,
-        height: 900,
-        overflowY: 'auto',
-    },
+const mapImageSourceToCategory = {
+    Music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    Sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    Cultural: "https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    Religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 }
-
-
+const imageStyle = {
+    width: 500,
+    borderRadius: 50,
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+}
 const List = (props) => (
-
-    <GridList
-    cellHeight={500}
-    style={styles.gridList}
->
-
+    <ul>
         {
             props.events
                 .filter(event => event.participants <= props.numberOfUsers)
@@ -60,40 +50,25 @@ const List = (props) => (
                                 backgroundColor: 'white'
                             }}
                         >
-
                             {
                                 event.category === "Music" ?
-                                    <img src="https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Music"
-                                        style={{
-                                            width: 500,
-                                            borderRadius: 50,
-                                            flexWrap: 'wrap',
-                                            justifyContent: 'space-evenly',
-                                        }}
+                                    <img src={mapImageSourceToCategory.Music} alt="Music"
+                                        style={imageStyle}
                                     />
                                     :
                                     event.category === "Sport" ?
-                                        <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Sport"
-                                            style={{
-                                                width: 500,
-                                                borderRadius: 50
-                                            }}
+                                        <img src={mapImageSourceToCategory.Sport} alt="Sport"
+                                            style={imageStyle}
                                         />
                                         :
                                         event.category === "Cultural" ?
-                                            <img src="https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Cultural"
-                                                style={{
-                                                    width: 500,
-                                                    borderRadius: 50
-                                                }}
+                                            <img src={mapImageSourceToCategory.Cultural} alt="Cultural"
+                                                style={imageStyle}
                                             />
                                             :
                                             event.category === "Religious" ?
-                                                <img src="https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Religious"
-                                                    style={{
-                                                        width: 500,
-                                                        borderRadius: 50
-                                                    }}
+                                                <img src={mapImageSourceToCategory.Religious} alt="Religious"
+                                                    style={imageStyle}
                                                 />
                                                 : false
                             }
@@ -101,16 +76,12 @@ const List = (props) => (
                                 style={{
                                     fontFamily: FontFamilyEpla,
                                     fontSize: 20
-
                                 }}
                             >
                                 <Link to={`/single-event/${event.key}`}>
                                     <p
                                         style={{
-
                                             textDecoration: 'none',
-
-
                                         }}
                                     > {event.eventName}</p>
                                 </Link>
@@ -126,17 +97,11 @@ const List = (props) => (
                                         <ActionFavoriteBorder />
                                     }
                                 </IconButton>
-
                             </div>
-
-
                         </Paper>
                     )
                 })
-
         }
-
-    </GridList>
+    </ul>
 )
-
 export default List
