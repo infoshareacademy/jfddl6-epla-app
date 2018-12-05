@@ -6,10 +6,10 @@ import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
 const mapImageSourceToCategory = {
-    Music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    Sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    Cultural: "https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    Religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+    music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    cultural: "https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 }
 const imageStyle = {
     width: 500,
@@ -51,26 +51,9 @@ const List = (props) => (
                             }}
                         >
                             {
-                                event.category === "Music" ?
-                                    <img src={mapImageSourceToCategory.Music} alt="Music"
-                                        style={imageStyle}
-                                    />
-                                    :
-                                    event.category === "Sport" ?
-                                        <img src={mapImageSourceToCategory.Sport} alt="Sport"
-                                            style={imageStyle}
-                                        />
-                                        :
-                                        event.category === "Cultural" ?
-                                            <img src={mapImageSourceToCategory.Cultural} alt="Cultural"
-                                                style={imageStyle}
-                                            />
-                                            :
-                                            event.category === "Religious" ?
-                                                <img src={mapImageSourceToCategory.Religious} alt="Religious"
-                                                    style={imageStyle}
-                                                />
-                                                : false
+                                <img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                    style={imageStyle}
+                                />
                             }
                             <div
                                 style={{
