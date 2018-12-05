@@ -108,10 +108,10 @@ class AddEventForm extends React.Component {
                         style={style}
                     >
                         <MenuItem value={''} primaryText="" />
-                        <MenuItem value={'Music'} primaryText="Music" />
-                        <MenuItem value={'Sport'} primaryText="Sport" />
-                        <MenuItem value={'Cultural'} primaryText="Cultural" />
-                        <MenuItem value={'Religious'} primaryText="Religious" />
+                        <MenuItem value={'music'} primaryText="music" />
+                        <MenuItem value={'sport'} primaryText="sport" />
+                        <MenuItem value={'cultural'} primaryText="cultural" />
+                        <MenuItem value={'religious'} primaryText="religious" />
                     </SelectField>
                     <DatePicker
                         hintText="Enter event date"
