@@ -9,7 +9,7 @@ import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
 import SingleEventView from './views/SingleEventView/SingleEventView'
 import FavouritesView from './views/FavouritesView/FavouritesView'
-import LoginView from './views/LoginView/LoginView';
+import Auth from './Auth/Auth';
 class App extends React.Component {
 
   state = {
@@ -26,10 +26,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <LoginView>
+      <Auth>
         <Router>
           <div>
-
             <Navigation
               title="ePla"
               keyChildProp="to">
@@ -70,8 +69,7 @@ class App extends React.Component {
           handleRequestClose={this.toggleNotification}
           notificationMessage={this.state.notificationMessage}
         />
-
-      </LoginView>
+      </Auth>
     )
   }
 }
