@@ -57,26 +57,10 @@ const List = (props) => (
                         >
 
                             {
-                                event.category === "Music" ?
-                                    <img src={mapImageSourceToCategory.Music} alt="Music"
-                                        style={imageStyle}
-                                    />
-                                    :
-                                    event.category === "Sport" ?
-                                        <img src={mapImageSourceToCategory.Sport} alt="Sport"
-                                            style={imageStyle}
-                                        />
-                                        :
-                                        event.category === "Cultural" ?
-                                            <img src={mapImageSourceToCategory.Cultural} alt="Cultural"
-                                                style={imageStyle}
-                                            />
-                                            :
-                                            event.category === "Religious" ?
-                                                <img src={mapImageSourceToCategory.Religious} alt="Religious"
-                                                    style={imageStyle}
-                                                />
-                                                : false
+                                 <img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                 style={imageStyle}
+                             />
+
                             }
                             <div
                                 style={{
