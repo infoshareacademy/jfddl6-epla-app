@@ -34,6 +34,13 @@ const LoginView = (props) => (
       onClick={props.onLogInClick}
       fullWidth={true}
     />
+     <RaisedButton
+      style={{ margin: '5px 0' }}
+      label={'Reset your password'}
+      primary={true}
+      onClick={props.resetPasswordHandler}
+      fullWidth={true}
+    />
     <RaisedButton
       style={{ margin: '5px 0' }}
       label={'Log in with Google'}

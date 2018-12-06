@@ -1,82 +1,74 @@
 import React from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 
-import { auth, googleProvider } from '../firebase'
 
 import LoginView from '../views/LoginView/LoginView'
 
+import {
+  initAuthChangeListeningAction,
+  onLogOutAsyncAction,
+  onLogInByGoogleClickAsyncAction,
+  logInAsyncAction,
+  emailChangeAction,
+  passwordChangeAction,
+  resetPasswordHandler
+} from '../state/auth'
+
+import { connect } from 'react-redux'
+
 class Auth extends React.Component {
-    state = {
-        email: '',
-        password: '',
-        isUserLoggedIn: false
-    }
 
-    componentDidMount() {
-        auth.onAuthStateChanged(
-            user => {
-                if (user) {
-                    this.setState({ isUserLoggedIn: true })
-                } else {
-                    this.setState({ isUserLoggedIn: false })
-                }
-            }
-        )
-    }
+  componentDidMount() {
+    this.props._initAuthChangeListeningAction()
+  }
 
-    onEmailChangeHandler = event => {
-        this.setState({ email: event.target.value })
-    }
-    onPasswordChangeHandler = event => {
-        this.setState({ password: event.target.value })
-    }
-
-    onLogInClick = () => {
-        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-            .catch(error => {
-                alert('Something is wrong! Check console for error details!')
-                console.log(error)
-            })
-    }
-
-    onLogInByGoogleClick = () => {
-        auth.signInWithPopup(googleProvider)
-    }
-
-    onLogOutClickHandler = () => {
-        auth.signOut()
-    }
-
-    render() {
-        return (
-            this.state.isUserLoggedIn ?
-                <div>
-                    <FloatingActionButton
-                        secondary={true}
-                        style={{
-                            position: 'absolute',
-                            top: 5,
-                            right: 10,
-                            zIndex: 9999,
-                            color: 'white'
-                        }}
-
-                        onClick={this.onLogOutClickHandler}
-                    >
-                        X
+  render() {
+    return (
+      this.props._isUserLoggedIn ?
+        <div>
+          <FloatingActionButton
+            style={{
+              position: 'fixed',
+              top: 10,
+              right: 10,
+              zIndex: 9999,
+              color: 'white'
+            }}
+            secondary={true}
+            onClick={this.props._onLogOutAsyncAction}
+          >
+            X
           </FloatingActionButton>
-                    {this.props.children}
-                </div>
-                :
-                <LoginView
-                    email={this.state.email}
-                    onEmailChangeHandler={this.onEmailChangeHandler}
-                    password={this.state.password}
-                    onPasswordChangeHandler={this.onPasswordChangeHandler}
-                    onLogInClick={this.onLogInClick}
-                    onLogInByGoogleClick={this.onLogInByGoogleClick}
-                />
-        )
-    }
+          {this.props.children}
+        </div>
+        :
+        <LoginView
+          email={this.props._email}
+          onEmailChangeHandler={this.props._emailChangeAction}
+          password={this.props._password}
+          onPasswordChangeHandler={this.props._passwordChangeAction}
+          onLogInClick={this.props._logInAsyncAction}
+          onLogInByGoogleClick={this.props._onLogInByGoogleClickAsyncAction}
+          resetPasswordHandler = {this.props._resetPasswordHandler}
+        />
+    )
+  }
 }
-export default Auth
+
+const mapStateToProps = state => ({
+  _isUserLoggedIn: state.auth.isUserLoggedIn,
+  _email: state.auth.email,
+  _password: state.auth.password
+})
+
+const mapDispatchToProps = dispatch => ({
+  _initAuthChangeListeningAction: () => dispatch(initAuthChangeListeningAction()),
+  _onLogOutAsyncAction: () => dispatch(onLogOutAsyncAction()),
+  _onLogInByGoogleClickAsyncAction: () => dispatch(onLogInByGoogleClickAsyncAction()),
+  _logInAsyncAction: () => dispatch(logInAsyncAction()),
+  _emailChangeAction: (event)=> dispatch(emailChangeAction(event.target.value)),
+  _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
+  _resetPasswordHandler: () => dispatch(resetPasswordHandler())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

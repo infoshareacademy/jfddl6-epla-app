@@ -6,7 +6,7 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import { Link } from 'react-router-dom'
 
 
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 
 const styles = {
     root: {
