@@ -84,10 +84,10 @@ const SearchForm = (props) => (
                 value={props.filterCategory}
             >
                 <MenuItem value={''} primaryText="All" />
-                <MenuItem value={'Music'} primaryText="Music" />
-                <MenuItem value={'Sport'} primaryText="Sport" />
-                <MenuItem value={'Cultural'} primaryText="Cultural" />
-                <MenuItem value={'Religious'} primaryText="Religious" />
+                <MenuItem value={'music'} primaryText="Music" />
+                <MenuItem value={'sport'} primaryText="Sport" />
+                <MenuItem value={'cultural'} primaryText="Cultural" />
+                <MenuItem value={'religious'} primaryText="Religious" />
             </DropDownMenu >
             <br />
         </div>
