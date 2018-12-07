@@ -1,5 +1,4 @@
 import React from 'react'
-import Paper from 'material-ui/Paper'
 import { FontFamilyEpla } from './SearchForm'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
@@ -25,79 +24,63 @@ const imageStyle = {
 }
 
 const List = (props) => (
-    <ul>
-        {
-            props.events
-                .filter(event => event.participants <= props.numberOfUsers)
-                .filter(event => (
-                    event.eventName
-                        .toLowerCase()
-                        .replace(/\s/g, '')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, "")
-                        .includes(
-                            props.filterText
-                                .toLowerCase()
-                                .replace(/\s/g, '')
-                                .normalize('NFD')
-                                .replace(/[\u0300-\u036f]/g, "")
-                        )
-                ))
-                .filter(event => (
-                    props.filterCategory === '' ? true : event.category === props.filterCategory
-                ))
-                .map(event => {
-                    return (
-                        <Grid fluid>
-                            <Row>
-                                <Col xs={6} md={3}>
-                                    {/* // <Paper
-                        //     style={{
-                        //         margin: "15px auto",
-                        //         padding: 10,
-                        //         width: '90vw',
-                        //         textAlign: 'center',
-                        //         backgroundColor: 'white'
-                        //     }}
-                        // > */}
-                                    {
-                                        <img src={mapImageSourceToCategory[event.category]} alt={event.category}
-                                            style={imageStyle}
-                                        />
-                                    }
-                                    <div
-                                        style={{
-                                            fontFamily: FontFamilyEpla,
-                                            fontSize: 20
-                                        }}
-                                    >
-                                        <Link to={`/single-event/${event.key}`} className='link'>
-                                            <p
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            > {event.eventName}</p>
-                                        </Link>
-                                        <p>{event.date}</p>
-                                        <p>{event.city}</p>
-                                        <p>{event.street}</p>
-                                        <IconButton
-                                            onClick={() => props.isFavourite(event)}
-                                        >
-                                            {event.isFavourite ?
-                                                <ActionFavorite />
-                                                :
-                                                <ActionFavoriteBorder />
-                                            }
-                                        </IconButton>
-                                    </div>
-                                    {/* </Paper> */}
-                                </Col>
-                            </Row>
-                        </Grid>
-                    )
-                })
-        }
-    </ul>
+    <Grid fluid>
+        <Row around="xs">
+            {
+                props.events
+                    .filter(event => event.participants <= props.numberOfUsers)
+                    .filter(event => (
+                        event.eventName
+                            .toLowerCase()
+                            .replace(/\s/g, '')
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, "")
+                            .includes(
+                                props.filterText
+                                    .toLowerCase()
+                                    .replace(/\s/g, '')
+                                    .normalize('NFD')
+                                    .replace(/[\u0300-\u036f]/g, "")
+                            )
+                    ))
+                    .filter(event => (
+                        props.filterCategory === '' ? true : event.category === props.filterCategory
+                    ))
+                    .map(event => {
+                        return (
+                            < img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                style={imageStyle}
+                            />
+
+                            <Link to={`/single-event/${event.key}`} className='link'>
+                                <p
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    {event.eventName}
+                                </p>
+                            </Link>
+                            <p>{event.date}</p>
+                            <p>{event.city}</p>
+                            <p>{event.street}</p>
+                            <IconButton
+                                onClick={() => props.isFavourite(event)}
+                            >
+                                {event.isFavourite ?
+                                    <ActionFavorite />
+                                    :
+                                    <ActionFavoriteBorder />
+                                }
+                            </IconButton>
+
+                        ))
+
+
+                            }
+            }
+    }
+    </Row>
+    </Grid>
 )
 export default List
