@@ -1,6 +1,6 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
@@ -32,18 +32,7 @@ class SingleEventView extends React.Component {
         }
     }
 
-
-
     componentDidMount() {
-        this.loadData()
-
-    }
-
-    componentWillUnmount() {
-        database.ref(`/events/${this.props.match.params.id}`).off()
-    }
-
-    loadData = () => {
         database.ref(`/events/${this.props.match.params.id}`)
             .on('value', (snapshot) => {
                 this.setState({
@@ -52,11 +41,16 @@ class SingleEventView extends React.Component {
             })
     }
 
-    isFavourite = (event) => {
-        fetch(`https:epla-app.firebaseio.com/events/${this.props.match.params.id}.json`, {
-            method: 'PATCH',
-            body: JSON.stringify({ isFavourite: !event.isFavourite })
-        }).then(() => this.loadData())
+
+    componentWillUnmount() {
+        database.ref(`/events/${this.props.match.params.id}`).off()
+    }
+
+    isFavourite = event => {
+        database.ref(`/events`).child(this.props.match.params.id)
+            .update({
+                isFavourite: !event.isFavourite
+            })
     }
 
 
@@ -75,7 +69,7 @@ class SingleEventView extends React.Component {
                             <h3>Street adress: {this.state.data && this.state.data.street}</h3>
                             <h3>Add to favourites:
                             <IconButton
-                                    onClick={() => this.isFavourite(this.state.data)}
+                                    onClick={() => this.state.data && this.isFavourite(this.state.data)}
                                 >
                                     {this.state.data && this.state.data.isFavourite ?
                                         <ActionFavorite />

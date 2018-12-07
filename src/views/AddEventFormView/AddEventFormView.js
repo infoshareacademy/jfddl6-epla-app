@@ -7,7 +7,7 @@ import DatePicker from 'material-ui/DatePicker'
 import Paper from 'material-ui/Paper'
 
 
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 
 const mapImageSourceToCategory = {
     music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
