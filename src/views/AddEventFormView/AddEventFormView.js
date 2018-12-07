@@ -7,7 +7,7 @@ import DatePicker from 'material-ui/DatePicker'
 import Paper from 'material-ui/Paper'
 
 
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 
 const style = {
     margin: 5,

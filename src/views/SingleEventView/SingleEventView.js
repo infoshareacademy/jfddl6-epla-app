@@ -1,6 +1,6 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'

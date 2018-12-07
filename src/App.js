@@ -9,6 +9,7 @@ import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
 import SingleEventView from './views/SingleEventView/SingleEventView'
 import FavouritesView from './views/FavouritesView/FavouritesView'
+import Auth from './Auth/Auth';
 class App extends React.Component {
 
   state = {
@@ -25,35 +26,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Auth>
         <Router>
           <div>
-            <div>
-              <Navigation
+            <Navigation
               title="ePla"
-            keyChildProp="to">
-                <Link to='/'>
-                  <MenuItem>
-                    Home
+              keyChildProp="to">
+              <Link to='/'>
+                <MenuItem>
+                  Home
               </MenuItem>
-                </Link>
-                <Link to='/event-list'>
-                  <MenuItem>
-                    Event List
+              </Link>
+              <Link to='/event-list'>
+                <MenuItem>
+                  Event List
               </MenuItem>
-                </Link>
-                <Link to='/add-event-form'>
-                  <MenuItem>
-                    Add Event
+              </Link>
+              <Link to='/add-event-form'>
+                <MenuItem>
+                  Add Event
               </MenuItem>
-                </Link>
-                <Link to='/favourites'>
-                  <MenuItem>
-                    Favourites List
+              </Link>
+              <Link to='/favourites'>
+                <MenuItem>
+                  Favourites List
               </MenuItem>
-                </Link>
-              </Navigation>
-            </div>
+              </Link>
+            </Navigation>
+
             <div>
               <Route path="/" exact={true} component={DashboardView} />
               <Route path="/event-list" component={EventListView} />
@@ -69,8 +69,7 @@ class App extends React.Component {
           handleRequestClose={this.toggleNotification}
           notificationMessage={this.state.notificationMessage}
         />
-
-      </div>
+      </Auth>
     )
   }
 }
