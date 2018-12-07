@@ -1,17 +1,18 @@
 import React from 'react'
+
+import { database } from '../../firebaseConfig'
 import List from './List'
 import SearchForm from './SearchForm'
 import Paper from 'material-ui/Paper'
 
-
-
+const dbRef = database.ref('/events')
 
 class EventListView extends React.Component {
     state = {
         filterText: '',
         numberOfUsers: 150,
         filterCategory: '',
-        events: [],
+        data: [],
         cols: 2
     }
 
@@ -22,26 +23,31 @@ class EventListView extends React.Component {
 
     handleEventsFilterCategoryChange = (e, key, value) => this.setState({ filterCategory: value })
 
-    isFavourite = (event) => {
-        fetch(`https:epla-app.firebaseio.com/events/${event.key}.json`, {
-            method: 'PATCH',
-            body: JSON.stringify({ isFavourite: !event.isFavourite })
-        }).then(() => this.loadData())
-    }
-
     componentDidMount() {
-        this.loadData()
+        dbRef.on(
+            'value',
+            snapshot => {
+                const events = Object.entries(
+                    snapshot.val()
+                ).map(entry => ({
+                    ...entry[1],
+                    key: entry[0]
+                }))
+
+                this.setState({ data: events })
+
+            }
+        )
     }
 
-    loadData = () => {
-        fetch('https://epla-app.firebaseio.com/events.json')
-            .then(response => response.json())
-            .then(data => {
-                const events = Object.entries(data).map(([key, value]) => ({
-                    ...value,
-                    key
-                }))
-                this.setState({ events: events })
+    componentWillUnmount() {
+        dbRef.off()
+    }
+
+    isFavourite = event => {
+        dbRef.child(event.key)
+            .update({
+                isFavourite: !event.isFavourite
             })
     }
 
@@ -59,7 +65,7 @@ class EventListView extends React.Component {
                 <Paper >
 
                     <List
-                        events={this.state.events}
+                        events={this.state.data}
                         filterCategory={this.state.filterCategory}
                         filterText={this.state.filterText}
                         numberOfUsers={this.state.numberOfUsers}

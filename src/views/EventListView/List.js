@@ -1,11 +1,11 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { FontFamilyEpla } from './SearchForm'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
 
+import { FontFamilyEpla } from './SearchForm'
 
 const List = (props) => (
 
@@ -86,15 +86,11 @@ const List = (props) => (
 
                                 }}
                             >
-                                <Link to={`/single-event/${event.key}`}>
-                                    <p
-                                        style={{
-
-                                            textDecoration: 'none',
-
-
-                                        }}
-                                    > {event.eventName}</p>
+                                <Link to={`/single-event/${event.key}`}
+                                    style={{
+                                        textDecoration: 'none',
+                                    }}>
+                                    <p> {event.eventName}</p>
                                 </Link>
                                 <p>{event.date}</p>
                                 <p>{event.city}</p>

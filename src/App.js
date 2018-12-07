@@ -9,7 +9,9 @@ import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
 import SingleEventView from './views/SingleEventView/SingleEventView'
 import FavouritesView from './views/FavouritesView/FavouritesView'
-import Auth from './Auth/Auth';
+import './App.css'
+import Auth from './Auth/Auth'
+
 class App extends React.Component {
 
   state = {
@@ -29,31 +31,48 @@ class App extends React.Component {
       <Auth>
         <Router>
           <div>
-            <Navigation
-              title="ePla"
-              keyChildProp="to">
-              <Link to='/'>
-                <MenuItem>
-                  Home
-              </MenuItem>
-              </Link>
-              <Link to='/event-list'>
-                <MenuItem>
-                  Event List
-              </MenuItem>
-              </Link>
-              <Link to='/add-event-form'>
-                <MenuItem>
-                  Add Event
-              </MenuItem>
-              </Link>
-              <Link to='/favourites'>
-                <MenuItem>
-                  Favourites List
-              </MenuItem>
-              </Link>
-            </Navigation>
-
+            <div>
+              <Navigation
+                title="ePla"
+                keyChildProp="to">
+                <Link
+                  to='/'
+                  className='link'
+                  >
+                  <MenuItem
+                    primaryText='Home'
+                  >
+                  </MenuItem>
+                </Link>
+                <Link
+                  to='/event-list'
+                  className='link'
+                >
+                  <MenuItem
+                    primaryText='Event List'
+                  >
+                  </MenuItem>
+                </Link>
+                <Link
+                  to='/add-event-form'
+                  className='link'
+                  >
+                  <MenuItem
+                    primaryText='Add Event'
+                  >
+                  </MenuItem>
+                </Link>
+                <Link
+                  to='/favourites'
+                  className='link'
+                >
+                  <MenuItem
+                    primaryText='Favourites List'
+                  >
+                  </MenuItem>
+                </Link>
+              </Navigation>
+            </div>
             <div>
               <Route path="/" exact={true} component={DashboardView} />
               <Route path="/event-list" component={EventListView} />
