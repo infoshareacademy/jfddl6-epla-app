@@ -40,9 +40,9 @@ export const resetPasswordHandler = () => (dispatch, getState) => {
 
     auth.sendPasswordResetEmail(emailAddress)
     .then(function () {
-        alert('yohoo')
+        alert("We've send you an email. Please check your mailbox")
     }).catch(function (error) {
-        alert('cannot')
+        alert('Please enter your email address')
     });
 }
 
