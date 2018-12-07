@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { database } from '../../firebase'
+import { database } from '../../firebaseConfig'
 import List from './List'
 import SearchForm from './SearchForm'
 import Paper from 'material-ui/Paper'
