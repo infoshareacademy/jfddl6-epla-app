@@ -6,6 +6,7 @@ import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import '../../App.css'
 
 const mapImageSourceToCategory = {
     music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
@@ -70,7 +71,7 @@ const List = (props) => (
                                             fontSize: 20
                                         }}
                                     >
-                                        <Link to={`/single-event/${event.key}`}>
+                                        <Link to={`/single-event/${event.key}`} className='link'>
                                             <p
                                                 style={{
                                                     textDecoration: 'none',
