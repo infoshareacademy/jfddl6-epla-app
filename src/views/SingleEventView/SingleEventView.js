@@ -6,6 +6,20 @@ import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
+const mapImageSourceToCategory = {
+    music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    cultural: "https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+}
+
+const imageStyle = {
+    width: 500,
+    borderRadius: 50,
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    marginTop: '3vh'
+}
 
 class SingleEventView extends React.Component {
 
@@ -17,6 +31,7 @@ class SingleEventView extends React.Component {
             data: null
         }
     }
+
 
 
     componentDidMount() {
@@ -71,52 +86,9 @@ class SingleEventView extends React.Component {
                             </h3>
                         </Col>
                         <Col xs={12} s={6} md={6}>
-                            {
-                                this.state.data && this.state.data.category === "Music" ?
-                                    <img src="https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Music"
-                                        style={{
-                                            width: 500,
-                                            borderRadius: 50,
-                                            flexWrap: 'wrap',
-                                            justifyContent: 'space-evenly',
-                                            marginTop: '3vh'
-                                        }}
-                                    />
-                                    :
-                                    this.state.data && this.state.data.category === "Sport" ?
-                                        <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Sport"
-                                            style={{
-                                                width: 500,
-                                                borderRadius: 50,
-                                                flexWrap: 'wrap',
-                                                justifyContent: 'space-evenly',
-                                                marginTop: '3vh'
-                                            }}
-                                        />
-                                        :
-                                        this.state.data && this.state.data.category === "Cultural" ?
-                                            <img src="https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Cultural"
-                                                style={{
-                                                    width: 500,
-                                                    borderRadius: 50,
-                                                    flexWrap: 'wrap',
-                                                    justifyContent: 'space-evenly',
-                                                    marginTop: '3vh'
-                                                }}
-                                            />
-                                            :
-                                            this.state.data && this.state.data.category === "Religious" ?
-                                                <img src="https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Religious"
-                                                    style={{
-                                                        width: 500,
-                                                        borderRadius: 50,
-                                                        flexWrap: 'wrap',
-                                                        justifyContent: 'space-evenly',
-                                                        marginTop: '3vh'
-                                                    }}
-                                                />
-                                                : false
-                            }
+                            <img src={this.state.data && mapImageSourceToCategory[this.state.data.category]} alt={this.state.data && this.state.data.category}
+                                style={imageStyle}
+                            />
                         </Col>
                     </Row>
                 </Grid>

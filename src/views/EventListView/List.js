@@ -57,9 +57,9 @@ const List = (props) => (
                         >
 
                             {
-                                 <img src={mapImageSourceToCategory[event.category]} alt={event.category}
-                                 style={imageStyle}
-                             />
+                                <img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                    style={imageStyle}
+                                />
 
                             }
                             <div
