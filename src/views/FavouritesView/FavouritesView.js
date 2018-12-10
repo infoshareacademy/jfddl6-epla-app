@@ -4,9 +4,14 @@ import IconButton from 'material-ui/IconButton'
 import Subheader from 'material-ui/Subheader'
 import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import { Link } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 
 import { database } from '../../firebaseConfig'
+import {
+    getEventListFromDbAsyncAction,
+    stopListeningToDbAsyncAction,
+    deleteEventAsyncAction
+} from '../../state/favouritesView'
 
 const styles = {
     root: {
@@ -25,36 +30,12 @@ const dbRef = database.ref('/events')
 
 class FavouritesView extends React.Component {
 
-    state = {
-        data: []
-    }
-
     componentDidMount() {
-        dbRef.on(
-            'value',
-            snapshot => {
-                const events = Object.entries(
-                    snapshot.val()
-                ).map(entry => ({
-                    ...entry[1],
-                    key: entry[0]
-                }))
-
-                this.setState({ data: events })
-
-            }
-        )
+        this.props._getEventListFromDbAsyncAction()
     }
 
     componentWillUnmount() {
-        dbRef.off()
-    }
-
-    onDeleteEventClickHandler = eventKey => {
-        dbRef.child(eventKey)
-            .update({
-                isFavourite: false
-            })
+        this.props._stopListeningToDbAsyncAction()
     }
 
     render() {
@@ -66,14 +47,14 @@ class FavouritesView extends React.Component {
                         style={styles.gridList}
                     >
                         <Subheader>Favourites List</Subheader>
-                        {this.state.data.filter(event => event.isFavourite === true)
+                        {this.props._data.filter(event => event.isFavourite === true)
                             .map((event) => (
                                 <Link to={`/single-event/${event.key}`} key={event.key}>
                                     <GridTile
                                         title={event.eventName}
                                         subtitle={<span>Category: <b>{event.category}</b></span>}
                                         actionIcon={<IconButton
-                                            onClick={() => this.onDeleteEventClickHandler(event.key)}
+                                            onClick={() => this.props._deleteEventAsyncAction(event.key)}
                                         >
                                             <StarBorder color="white" />
                                         </IconButton>}
@@ -98,4 +79,14 @@ class FavouritesView extends React.Component {
     }
 }
 
-export default FavouritesView
+const mapStateToProps = state => ({
+    _data: state.favouritesView.data
+})
+
+const mapDispatchToProps = dispatch => ({
+    _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
+    _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
+    _deleteEventAsyncAction: (eventKey) => dispatch(deleteEventAsyncAction(eventKey))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavouritesView)
