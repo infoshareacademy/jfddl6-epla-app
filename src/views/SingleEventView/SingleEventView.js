@@ -6,6 +6,15 @@ import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
+import { connect } from 'react-redux'
+
+import {
+    getEventListFromDbAsyncAction,
+    stopListeningToDbAsyncAction,
+    deleteEventAsyncAction,
+    toggleFavouriteAsyncAction
+} from '../../state/favouritesView'
+
 const mapImageSourceToCategory = {
     music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
     sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
@@ -28,22 +37,16 @@ class SingleEventView extends React.Component {
         super()
         this.state = {
             viewportWidth: window.innerWidth,
-            data: null
         }
     }
 
     componentDidMount() {
-        database.ref(`/events/${this.props.match.params.id}`)
-            .on('value', (snapshot) => {
-                this.setState({
-                    data: snapshot.val()
-                })
-            })
+        this.props._getEventListFromDbAsyncAction()
     }
 
 
     componentWillUnmount() {
-        database.ref(`/events/${this.props.match.params.id}`).off()
+        this.props._stopListeningToDbAsyncAction()
     }
 
     isFavourite = event => {
@@ -53,25 +56,24 @@ class SingleEventView extends React.Component {
             })
     }
 
-
-
     render() {
+        const event = this.props._data.find(element => element.key === this.props.match.params.id)
         return (
             <Paper>
                 <Grid>
                     <Row>
                         <Col xs={12} s={6} md={6}>
-                            <h1>Event Name: {this.state.data && this.state.data.eventName}</h1>
-                            <h3>Event Category: {this.state.data && this.state.data.category}</h3>
-                            <h3>City: {this.state.data && this.state.data.city}</h3>
-                            <h3>Date: {this.state.data && this.state.data.date}</h3>
-                            <h3>Numbers of participants: {this.state.data && this.state.data.participants}</h3>
-                            <h3>Street adress: {this.state.data && this.state.data.street}</h3>
+                            <h1>Event Name: {event && event.eventName}</h1>
+                            <h3>Event Category: {event && event.category}</h3>
+                            <h3>City: {event && event.city}</h3>
+                            <h3>Date: {event && event.date}</h3>
+                            <h3>Numbers of participants: {event && event.participants}</h3>
+                            <h3>Street adress: {event && event.street}</h3>
                             <h3>Add to favourites:
                             <IconButton
-                                    onClick={() => this.state.data && this.isFavourite(this.state.data)}
+                                    onClick={() => event && this.props._toggleFavouriteAsyncAction(event)}
                                 >
-                                    {this.state.data && this.state.data.isFavourite ?
+                                    {event && event.isFavourite ?
                                         <ActionFavorite />
                                         :
                                         <ActionFavoriteBorder />
@@ -80,7 +82,7 @@ class SingleEventView extends React.Component {
                             </h3>
                         </Col>
                         <Col xs={12} s={6} md={6}>
-                            <img src={this.state.data && mapImageSourceToCategory[this.state.data.category]} alt={this.state.data && this.state.data.category}
+                            <img src={event && mapImageSourceToCategory[event.category]} alt={event && event.category}
                                 style={imageStyle}
                             />
                         </Col>
@@ -91,4 +93,15 @@ class SingleEventView extends React.Component {
     }
 }
 
-export default SingleEventView
+const mapStateToProps = state => ({
+    _data: state.favouritesView.data
+})
+
+const mapDispatchToProps = dispatch => ({
+    _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
+    _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
+    _deleteEventAsyncAction: (eventKey) => dispatch(deleteEventAsyncAction(eventKey)),
+    _toggleFavouriteAsyncAction: (event) => dispatch(toggleFavouriteAsyncAction(event))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEventView)

@@ -35,6 +35,14 @@ export const deleteEventAsyncAction = (eventKey) => (dispatch, getState) => {
         })
 }
 
+export const toggleFavouriteAsyncAction = (event) => (dispatch, getState) => {
+    database.ref(`/events`).child(event.key)
+        .update({
+            isFavourite: !event.isFavourite
+        })
+}
+
+
 const saveEventListAction = (data) => ({
     type: SAVE_EVENT_LIST,
     data
