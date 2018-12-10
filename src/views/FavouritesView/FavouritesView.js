@@ -6,7 +6,6 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { database } from '../../firebaseConfig'
 import {
     getEventListFromDbAsyncAction,
     stopListeningToDbAsyncAction,
@@ -25,8 +24,6 @@ const styles = {
         overflowY: 'auto',
     },
 }
-
-const dbRef = database.ref('/events')
 
 class FavouritesView extends React.Component {
 
