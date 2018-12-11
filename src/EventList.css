@@ -1,0 +1,42 @@
+.list-container {
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+.image {
+    width: 33vw;
+    height: 23vw;
+    border-radius: 50px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 15px;
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(22, 22, 204);
+}
+
+.link:hover {
+    color: orange;
+}
+
+.link:active {
+    color: black;
+}
+
+.paper {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .list-container  {
+        flex-direction: column;
+    }
+}

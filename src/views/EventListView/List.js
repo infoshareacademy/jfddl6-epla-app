@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
+import Paper from 'material-ui/Paper'
+import '../../EventList.css'
 // import {List, ListItem} from 'material-ui/List';
 
 const mapImageSourceToCategory = {
@@ -13,18 +15,8 @@ const mapImageSourceToCategory = {
     religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 }
 
-
-const imageStyle = {
-    width: '25vw',
-    borderRadius: 50,
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    margin: 20
-}
-
-
 const List = (props) => (
-    <div>
+    <div className='list-container'>
         {
             props.events
                 .filter(event => event.participants <= props.numberOfUsers)
@@ -47,40 +39,42 @@ const List = (props) => (
                 ))
                 .map(event => {
                     return (
-            <div>
-                                    {
-                                        <img src={mapImageSourceToCategory[event.category]} alt={event.category}
-                                            style={imageStyle}
-                                        />
-                                    }
-                                    <div
+                        <Paper className='paper'>
+                            <Link to={`/single-event/${event.key}`} className='link'>
+                                {
+                                    <img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                        className='image'
+                                    />
+                                }
+                            </Link>
+                            <div
+                                style={{
+                                    fontFamily: FontFamilyEpla,
+                                    fontSize: 20,
+                                    textAlign: "center"
+                                }}
+                            >
+                                <Link to={`/single-event/${event.key}`} className='link'>
+                                    <p
                                         style={{
-                                            fontFamily: FontFamilyEpla,
-                                            fontSize: 20,
-                                            textAlign: "center"
+                                            textDecoration: 'none',
                                         }}
-                                        >
-                                        <Link to={`/single-event/${event.key}`}>
-                                            <p
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            > {event.eventName}</p>
-                                        </Link>
-                                        <p>{event.date}</p>
-                                        <p>{event.city}</p>
-                                        <p>{event.street}</p>
-                                        <IconButton
-                                            onClick={() => props.isFavourite(event)}
-                                        >
-                                            {event.isFavourite ?
-                                                <ActionFavorite />
-                                                :
-                                                <ActionFavoriteBorder />
-                                            }
-                                        </IconButton>
-                                    </div>
-                             </div>
+                                    > {event.eventName}</p>
+                                </Link>
+                                <p>{event.date}</p>
+                                <p>{event.city}</p>
+                                <p>{event.street}</p>
+                                <IconButton
+                                    onClick={() => props.isFavourite(event)}
+                                >
+                                    {event.isFavourite ?
+                                        <ActionFavorite />
+                                        :
+                                        <ActionFavoriteBorder />
+                                    }
+                                </IconButton>
+                            </div>
+                        </Paper>
                     )
                 })
         }
