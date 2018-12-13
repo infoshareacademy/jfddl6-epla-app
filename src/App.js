@@ -13,19 +13,6 @@ import './App.css'
 import Auth from './Auth/Auth'
 
 class App extends React.Component {
-
-  state = {
-    isNotificationOpen: false,
-    notificationMessage: ''
-  }
-
-  toggleNotification = (message) => {
-    this.setState({
-      isNotificationOpen: !this.state.isNotificationOpen,
-      notificationMessage: message || ''
-    })
-  }
-
   render() {
     return (
       <Auth>
@@ -83,11 +70,7 @@ class App extends React.Component {
           </div>
         </Router>
 
-        <Notification
-          isNotificationOpen={this.state.isNotificationOpen}
-          handleRequestClose={this.toggleNotification}
-          notificationMessage={this.state.notificationMessage}
-        />
+        <Notification/>
       </Auth>
     )
   }

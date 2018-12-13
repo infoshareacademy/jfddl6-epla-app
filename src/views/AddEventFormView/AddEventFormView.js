@@ -41,7 +41,7 @@ const AddEventForm = props => (
                         type="text"
                         floatingLabelText="Enter event name"
                         value={props._eventName}
-                        onChange={(event, newVal) => props._eventNameChangeAction(newVal)}
+                        onChange={props._eventNameChangeAction}
                         style={style}
                     />
                     <SelectField
@@ -69,21 +69,21 @@ const AddEventForm = props => (
                         type="text"
                         floatingLabelText="Enter city"
                         value={props._city}
-                        onChange={(event, newVal) => props._cityChangeAction(newVal)}
+                        onChange={props._cityChangeAction}
                         style={style}
                     />
                     <TextField
                         type="text"
                         floatingLabelText="Enter street name"
                         value={props._street}
-                        onChange={(event, newVal) => props._streetChangeAction(newVal)}
+                        onChange={props._streetChangeAction}
                         style={style}
                     />
                     <RaisedButton
                         label="Add event"
                         primary={true}
                         style={style}
-                        onClick={props.handleAddEventClick}
+                        onClick={props._handleAddEventClick}
                     />
                 </Paper>
             </div>
@@ -102,11 +102,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     _addToFirebaseAsyncAction: () => dispatch(addToFirebaseAsyncAction()),
     _handleAddEventClick: () => dispatch(handleAddEventClick()),
-    _dateChangeAction: () => dispatch(dateChangeAction()),
-    _categorySelectChange: () => dispatch(categorySelectChange()),
-    _streetChangeAction: () => dispatch(streetChangeAction()),
-    _cityChangeAction: () => dispatch(cityChangeAction()),
-    _eventNameChangeAction: () => dispatch(eventNameChangeAction())
+    _dateChangeAction: (event, date) => dispatch(dateChangeAction(event, date)),
+    _categorySelectChange: (event, index, text) => dispatch(categorySelectChange(event, index, text)),
+    _streetChangeAction: (event, text) => dispatch(streetChangeAction(event, text)),
+    _cityChangeAction: (event, text) => dispatch(cityChangeAction(event, text)),
+    _eventNameChangeAction: (event, text) => dispatch(eventNameChangeAction(event, text))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEventForm)

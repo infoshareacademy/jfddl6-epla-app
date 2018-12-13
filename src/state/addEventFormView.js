@@ -1,5 +1,5 @@
 import { database } from '../firebaseConfig'
-import { toggleNotification } from './notification'
+import { toggleNotificationAction } from './notification'
 
 const dbRef = database.ref('/events')
 
@@ -20,23 +20,25 @@ const INITIAL_STATE = {
     photo: ''
 }
 
-export const addToFirebaseAsyncAction = () => {
+export const addToFirebaseAsyncAction = () => (dispatch, getState) => {
+    const state = getState().addEventFormView
     dbRef.push({
         ...state,
-        date: ourDateFormatter(state.date),
+        date: ourDateFormatter(getState().addEventFormView.date),
         participants: getRandomParticipantsNumber(),
     })
 
     dispatch(restoreInitialStateAction())
 }
 
-export const handleAddEventClick = () => {
+export const handleAddEventClick = () => (dispatch, getState) => {
+    const state = getState().addEventFormView
     if (state.eventName !== '' && state.category !== '' && state.date !== '') {
-        toggleNotification('Event added')
-        addToFirebaseAsyncAction()
+        dispatch(toggleNotificationAction('Event added'))
+        dispatch(addToFirebaseAsyncAction())
     }
     else {
-        toggleNotification('Enter event name, category and date.')
+        dispatch(toggleNotificationAction('Enter event name, category and date.'))
     }
 }
 
@@ -104,7 +106,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 category: action.text,
-                photo: mapImageSourceToCategory[action.newValue]
+                photo: mapImageSourceToCategory[action.text]
             }
         default:
             return state
