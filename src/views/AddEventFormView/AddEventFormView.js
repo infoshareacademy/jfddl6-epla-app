@@ -5,80 +5,24 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import DatePicker from 'material-ui/DatePicker'
 import Paper from 'material-ui/Paper'
+import { connect } from 'react-redux'
 
-
-import { database } from '../../firebaseConfig'
-
-const mapImageSourceToCategory = {
-    music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    sport: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    cultural: "https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    religious: "https://images.pexels.com/photos/372326/pexels-photo-372326.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-}
+import {
+    addToFirebaseAsyncAction,
+    handleAddEventClick,
+    eventNameChangeAction,
+    dateChangeAction,
+    categorySelectChange,
+    cityChangeAction,
+    streetChangeAction
+} from '../../state/addEventFormView'
 
 const style = {
     margin: 5,
     width: '98%'
 }
 
-class AddEventForm extends React.Component {
-
-    state = {
-        eventName: '',
-        category: '',
-        date: '',
-        city: '',
-        street: '',
-        isFavourite: false,
-        photo: ''
-    }
-
-    getRandomParticipantsNumber = () =>
-        Math.round(Math.random() * 100) + 50
-
-    handleAddEventClick = () => {
-        if (this.state.eventName !== '' && this.state.category !== '' && this.state.date !== '') {
-            this.props.toggleNotification('Event added')
-            this.addToFirebase()
-        }
-        else {
-            this.props.toggleNotification('Enter event name, category and date.')
-        }
-    }
-
-    addToFirebase = () => {
-        database.ref('/events').push({
-            ...this.state,
-            date: this.ourDateFormatter(this.state.date),
-            participants: this.getRandomParticipantsNumber(),
-
-        })
-        this.setState({
-            eventName: '',
-            category: '',
-            date: '',
-            city: '',
-            street: '',
-            photo: ''
-        })
-    }
-
-    ourDateFormatter = (date) => {
-        return date.getDate() + ' -' + (date.getMonth() + 1) + ' -' + date.getFullYear()
-    }
-
-    handleDateChange = (event, date) => {
-        this.setState({
-            date: date
-        })
-    }
-
-    handleCategorySelectChange = (event, index, newValue) => {
-        this.setState({ category: newValue, photo: mapImageSourceToCategory[newValue]})
-    }
-
-    render() {
-        return (
+const AddEventForm = props => (
             <div
                 style={{
                     width: '100%',
@@ -96,14 +40,14 @@ class AddEventForm extends React.Component {
                     <TextField
                         type="text"
                         floatingLabelText="Enter event name"
-                        value={this.state.eventName}
-                        onChange={(event, newVal) => this.setState({ eventName: newVal })}
+                        value={props._eventName}
+                        onChange={(event, newVal) => props._eventNameChangeAction(newVal)}
                         style={style}
                     />
                     <SelectField
                         floatingLabelText="Enter event category"
-                        value={this.state.category}
-                        onChange={this.handleCategorySelectChange}
+                        value={props._category}
+                        onChange={props._categorySelectChange}
                         style={style}
                     >
                         <MenuItem value={''} primaryText="" />
@@ -114,8 +58,8 @@ class AddEventForm extends React.Component {
                     </SelectField>
                     <DatePicker
                         hintText="Enter event date"
-                        value={this.state.date}
-                        onChange={this.handleDateChange}
+                        value={props._date}
+                        onChange={props._dateChangeAction}
                         textFieldStyle={{
                             width: '98%',
                             margin: 5
@@ -124,28 +68,45 @@ class AddEventForm extends React.Component {
                     <TextField
                         type="text"
                         floatingLabelText="Enter city"
-                        value={this.state.city}
-                        onChange={(event, newVal) => this.setState({ city: newVal })}
+                        value={props._city}
+                        onChange={(event, newVal) => props._cityChangeAction(newVal)}
                         style={style}
                     />
                     <TextField
                         type="text"
                         floatingLabelText="Enter street name"
-                        value={this.state.street}
-                        onChange={(event, newVal) => this.setState({ street: newVal })}
+                        value={props._street}
+                        onChange={(event, newVal) => props._streetChangeAction(newVal)}
                         style={style}
                     />
                     <RaisedButton
                         label="Add event"
                         primary={true}
                         style={style}
-                        onClick={this.handleAddEventClick}
+                        onClick={props.handleAddEventClick}
                     />
                 </Paper>
             </div>
         )
-    }
-}
 
+const mapStateToProps = state => ({
+    _eventName: state.addEventFormView.eventName,
+    _category: state.addEventFormView.category,
+    _date: state.addEventFormView.date,
+    _city: state.addEventFormView.city,
+    _street: state.addEventFormView.street,
+    _isFavourite: state.addEventFormView.isFavourite,
+    _photo: state.addEventFormView.photo,
+})
 
-export default AddEventForm
+const mapDispatchToProps = dispatch => ({
+    _addToFirebaseAsyncAction: () => dispatch(addToFirebaseAsyncAction()),
+    _handleAddEventClick: () => dispatch(handleAddEventClick()),
+    _dateChangeAction: () => dispatch(dateChangeAction()),
+    _categorySelectChange: () => dispatch(categorySelectChange()),
+    _streetChangeAction: () => dispatch(streetChangeAction()),
+    _cityChangeAction: () => dispatch(cityChangeAction()),
+    _eventNameChangeAction: () => dispatch(eventNameChangeAction())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventForm)
