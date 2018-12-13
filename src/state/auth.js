@@ -1,5 +1,7 @@
 import { auth, database, googleProvider } from '../firebaseConfig'
 
+import { startListeningFavsAsyncAction, stopListeningFavsAsyncAction } from './favouritesView'
+
 const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
@@ -11,7 +13,9 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
             if (user) {
                 dispatch(logInAction(user))
                 dispatch(saveLoginTimestampAsyncAction())
+                dispatch(startListeningFavsAsyncAction())
             } else {
+                dispatch(stopListeningFavsAsyncAction())
                 dispatch(logOutAction())
             }
         }
@@ -39,11 +43,11 @@ export const resetPasswordHandler = () => (dispatch, getState) => {
     const emailAddress = getState().auth.email
 
     auth.sendPasswordResetEmail(emailAddress)
-    .then(function () {
-        alert("We've send you an email. Please check your mailbox")
-    }).catch(function (error) {
-        alert('Please enter your email address')
-    });
+        .then(function () {
+            alert("We've send you an email. Please check your mailbox")
+        }).catch(function (error) {
+            alert('Please enter your email address')
+        });
 }
 
 const saveLoginTimestampAsyncAction = () => (dispatch, getState) => {
