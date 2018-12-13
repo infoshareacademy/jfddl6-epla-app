@@ -57,6 +57,10 @@ class DashboardView extends React.Component {
             label: false
         }))
 
+        const eventsData = this.props._data
+        console.log(eventsData)
+
+
         if (window.innerWidth > 960) {
             return (
 
@@ -134,7 +138,8 @@ class DashboardView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    _loginsData: state.loginsTimestamps.loginsData
+    _loginsData: state.loginsTimestamps.loginsData,
+    _data: state.favouritesView.data
 })
 
 export default connect(mapStateToProps)(DashboardView)
