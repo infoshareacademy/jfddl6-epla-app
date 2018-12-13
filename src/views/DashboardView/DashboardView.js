@@ -58,6 +58,8 @@ class DashboardView extends React.Component {
         }))
 
         const eventsData = this.props._data
+
+        console.log(barData)
         console.log(eventsData)
 
 

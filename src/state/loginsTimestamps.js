@@ -32,7 +32,7 @@ const addLoginsTimestampToState = (loginLogs) => ({
 
 
 export default (state = INITIAL_STATE, action) => {
-    if (ADD_LOGINS_TIMESTAMP_TO_STATE) {
+    if (action.type === ADD_LOGINS_TIMESTAMP_TO_STATE) {
         return {
             ...state,
             loginsData: action.loginLogs
