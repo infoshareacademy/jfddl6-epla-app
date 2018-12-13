@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import {
     getEventListFromDbAsyncAction,
     stopListeningToDbAsyncAction,
-    deleteEventAsyncAction
+    toggleFavouriteAsyncAction
 } from '../../state/favouritesView'
 
 const styles = {
@@ -51,7 +51,7 @@ class FavouritesView extends React.Component {
                                         title={event.eventName}
                                         subtitle={<span>Category: <b>{event.category}</b></span>}
                                         actionIcon={<IconButton
-                                            onClick={() => this.props._deleteEventAsyncAction(event.key)}
+                                            onClick={() => this.props._toggleFavouriteAsyncAction(event)}
                                         >
                                             <StarBorder color="white" />
                                         </IconButton>}
@@ -83,7 +83,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
     _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
-    _deleteEventAsyncAction: (eventKey) => dispatch(deleteEventAsyncAction(eventKey))
+    _toggleFavouriteAsyncAction: (event) => dispatch(toggleFavouriteAsyncAction(event))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavouritesView)

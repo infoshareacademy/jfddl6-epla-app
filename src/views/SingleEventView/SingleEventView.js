@@ -11,7 +11,6 @@ import { connect } from 'react-redux'
 import {
     getEventListFromDbAsyncAction,
     stopListeningToDbAsyncAction,
-    deleteEventAsyncAction,
     toggleFavouriteAsyncAction
 } from '../../state/favouritesView'
 
@@ -100,7 +99,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
     _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
-    _deleteEventAsyncAction: (eventKey) => dispatch(deleteEventAsyncAction(eventKey)),
     _toggleFavouriteAsyncAction: (event) => dispatch(toggleFavouriteAsyncAction(event))
 })
 

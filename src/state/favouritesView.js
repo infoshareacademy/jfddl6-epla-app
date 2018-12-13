@@ -28,13 +28,6 @@ export const stopListeningToDbAsyncAction = () => (dispatch, getState) => {
     dbRef.off()
 }
 
-export const deleteEventAsyncAction = (eventKey) => (dispatch, getState) => {
-    dbRef.child(eventKey)
-        .update({
-            isFavourite: false
-        })
-}
-
 export const toggleFavouriteAsyncAction = (event) => (dispatch, getState) => {
     database.ref(`/events`).child(event.key)
         .update({

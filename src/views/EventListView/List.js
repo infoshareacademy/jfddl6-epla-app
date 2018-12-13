@@ -55,6 +55,7 @@ const List = (props) => (
                                 textAlign: 'center',
                                 backgroundColor: 'white'
                             }}
+                            key={event.key}
                         >
 
                             {
