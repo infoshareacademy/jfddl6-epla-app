@@ -12,67 +12,63 @@ import FavouritesView from './views/FavouritesView/FavouritesView'
 import './App.css'
 import Auth from './Auth/Auth'
 
-class App extends React.Component {
-  render() {
-    return (
-      <Auth>
-        <Router>
-          <div>
-            <div>
-              <Navigation
-                title="ePla"
-                keyChildProp="to">
-                <Link
-                  to='/'
-                  className='link'
-                  >
-                  <MenuItem
-                    primaryText='Home'
-                  >
-                  </MenuItem>
-                </Link>
-                <Link
-                  to='/event-list'
-                  className='link'
-                >
-                  <MenuItem
-                    primaryText='Event List'
-                  >
-                  </MenuItem>
-                </Link>
-                <Link
-                  to='/add-event-form'
-                  className='link'
-                  >
-                  <MenuItem
-                    primaryText='Add Event'
-                  >
-                  </MenuItem>
-                </Link>
-                <Link
-                  to='/favourites'
-                  className='link'
-                >
-                  <MenuItem
-                    primaryText='Favourites List'
-                  >
-                  </MenuItem>
-                </Link>
-              </Navigation>
-            </div>
-            <div>
-              <Route path="/" exact={true} component={DashboardView} />
-              <Route path="/event-list" component={EventListView} />
-              <Route path="/single-event/:id" component={SingleEventView} />
-              <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
-              <Route path="/favourites" component={FavouritesView} />
-            </div>
-          </div>
-        </Router>
+const App = props => (
+  <Auth>
+    <Router>
+      <div>
+        <div>
+          <Navigation
+            title="ePla"
+            keyChildProp="to">
+            <Link
+              to='/'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Home'
+              >
+              </MenuItem>
+            </Link>
+            <Link
+              to='/event-list'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Event List'
+              >
+              </MenuItem>
+            </Link>
+            <Link
+              to='/add-event-form'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Add Event'
+              >
+              </MenuItem>
+            </Link>
+            <Link
+              to='/favourites'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Favourites List'
+              >
+              </MenuItem>
+            </Link>
+          </Navigation>
+        </div>
+        <div>
+          <Route path="/" exact={true} component={DashboardView} />
+          <Route path="/event-list" component={EventListView} />
+          <Route path="/single-event/:id" component={SingleEventView} />
+          <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
+          <Route path="/favourites" component={FavouritesView} />
+        </div>
+      </div>
+    </Router>
 
-        <Notification/>
-      </Auth>
-    )
-  }
-}
+    <Notification />
+  </Auth>
+)
 export default App

@@ -23,71 +23,71 @@ const style = {
 }
 
 const AddEventForm = props => (
-            <div
-                style={{
-                    width: '100%',
-                    margin: '12',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
+    <div
+        style={{
+            width: '100%',
+            margin: '12',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}
+    >
+        <Paper
+            style={{
+                width: '90%'
+            }}
+        >
+            <TextField
+                type="text"
+                floatingLabelText="Enter event name"
+                value={props._eventName}
+                onChange={props._eventNameChangeAction}
+                style={style}
+            />
+            <SelectField
+                floatingLabelText="Enter event category"
+                value={props._category}
+                onChange={props._categorySelectChange}
+                style={style}
             >
-                <Paper
-                    style={{
-                        width: '90%'
-                    }}
-                >
-                    <TextField
-                        type="text"
-                        floatingLabelText="Enter event name"
-                        value={props._eventName}
-                        onChange={props._eventNameChangeAction}
-                        style={style}
-                    />
-                    <SelectField
-                        floatingLabelText="Enter event category"
-                        value={props._category}
-                        onChange={props._categorySelectChange}
-                        style={style}
-                    >
-                        <MenuItem value={''} primaryText="" />
-                        <MenuItem value={'music'} primaryText="music" />
-                        <MenuItem value={'sport'} primaryText="sport" />
-                        <MenuItem value={'cultural'} primaryText="cultural" />
-                        <MenuItem value={'religious'} primaryText="religious" />
-                    </SelectField>
-                    <DatePicker
-                        hintText="Enter event date"
-                        value={props._date}
-                        onChange={props._dateChangeAction}
-                        textFieldStyle={{
-                            width: '98%',
-                            margin: 5
-                        }}
-                    />
-                    <TextField
-                        type="text"
-                        floatingLabelText="Enter city"
-                        value={props._city}
-                        onChange={props._cityChangeAction}
-                        style={style}
-                    />
-                    <TextField
-                        type="text"
-                        floatingLabelText="Enter street name"
-                        value={props._street}
-                        onChange={props._streetChangeAction}
-                        style={style}
-                    />
-                    <RaisedButton
-                        label="Add event"
-                        primary={true}
-                        style={style}
-                        onClick={props._handleAddEventClick}
-                    />
-                </Paper>
-            </div>
-        )
+                <MenuItem value={''} primaryText="" />
+                <MenuItem value={'music'} primaryText="music" />
+                <MenuItem value={'sport'} primaryText="sport" />
+                <MenuItem value={'cultural'} primaryText="cultural" />
+                <MenuItem value={'religious'} primaryText="religious" />
+            </SelectField>
+            <DatePicker
+                hintText="Enter event date"
+                value={props._date}
+                onChange={props._dateChangeAction}
+                textFieldStyle={{
+                    width: '98%',
+                    margin: 5
+                }}
+            />
+            <TextField
+                type="text"
+                floatingLabelText="Enter city"
+                value={props._city}
+                onChange={props._cityChangeAction}
+                style={style}
+            />
+            <TextField
+                type="text"
+                floatingLabelText="Enter street name"
+                value={props._street}
+                onChange={props._streetChangeAction}
+                style={style}
+            />
+            <RaisedButton
+                label="Add event"
+                primary={true}
+                style={style}
+                onClick={props._handleAddEventClick}
+            />
+        </Paper>
+    </div>
+)
 
 const mapStateToProps = state => ({
     _eventName: state.addEventFormView.eventName,
