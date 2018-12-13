@@ -2,9 +2,11 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import auth from './state/auth'
+import loginsTimestamps from './state/loginsTimestamps'
 
 const reducer = combineReducers({
-    auth
+    auth,
+    loginsTimestamps
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
