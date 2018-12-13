@@ -3,38 +3,38 @@ import { BarChart, CartesianGrid, XAxis, YAxis, Bar } from 'recharts'
 
 const barChartData = [
   {
-    day: "Sunday",
+    day: "1",
     participants: 25,
     fill: "rgba(229, 142, 38, 1)",
   },
   {
-    day: "Monday",
+    day: "2",
     participants: 8,
     fill: "rgba(56, 173, 169, 1)",
   },
   {
-    day: "Tuesday",
+    day: "3",
     participants: 10,
     fill: "rgba(60, 99, 130, 1)",
   },
   {
-    day: "Wednesday",
+    day: "4",
     participants: 12,
     fill: "rgba(229, 80, 57, 1)",
     label: false
   },
   {
-    day: "Thursday",
+    day: "5",
     participants: 8,
     fill: "rgba(130, 204, 221, 1)",
   },
   {
-    day: "Friday",
+    day: "6",
     participants: 18,
     fill: "rgba(120, 224, 143, 1)",
   },
   {
-    day: "Saturday",
+    day: "7",
     participants: 33,
     fill: "rgba(56, 173, 169, 1)",
     mainColor: "white",
@@ -48,7 +48,7 @@ const DashboardBarChart = (props) => (
     >
       Events participants
     </h2>
-    <BarChart width={props.width} height={props.height} data={barChartData}>
+    <BarChart width={props.width} height={props.height} data={props.barChartData || barChartData}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="day" />
       <YAxis />
