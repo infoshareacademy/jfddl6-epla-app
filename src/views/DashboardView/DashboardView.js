@@ -8,6 +8,7 @@ class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth
     }
+    
 
     componentDidMount() {
         window.addEventListener(
@@ -59,9 +60,34 @@ class DashboardView extends React.Component {
 
         const eventsData = this.props._data
 
-        console.log(barData)
-        console.log(eventsData)
+        const musicEventsNumber = eventsData.filter(e => e.category === 'music').length
+        const sportsEventsNumber = eventsData.filter(e => e.category === 'sport').length
+        const culturalEventsNumber = eventsData.filter(e => e.category === 'cultural').length
+        const religiousEventsNumber = eventsData.filter(e => e.category === 'religious').length
 
+
+        const pieData = [
+            {
+                name: 'sport',
+                value: sportsEventsNumber,
+                fill: "rgba(183, 21, 64, 0.8)"
+            },
+            {
+                name: 'music',
+                value: musicEventsNumber,
+                fill: "rgba(10, 61, 98, 0.8)"
+            },
+            {
+                name: 'cultural',
+                value: culturalEventsNumber,
+                fill: "rgba(246, 185, 59, 0.8)"
+            },
+            {
+                name: 'religious',
+                value: religiousEventsNumber,
+                fill: "rgba(7, 153, 146, 0.8)"
+            },
+        ]
 
         if (window.innerWidth > 960) {
             return (
@@ -70,6 +96,7 @@ class DashboardView extends React.Component {
                     <Row>
                         <Col xs={12} s={6} md={6}>
                             <DashboardPieChart
+                                pieChartData={pieData}
                                 width={this.state.viewportWidth / 2 - 50}
                                 height={this.state.viewportWidth / 2 - 80}
                             />
