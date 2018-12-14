@@ -8,7 +8,7 @@ class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth
     }
-    
+
 
     componentDidMount() {
         window.addEventListener(
@@ -119,6 +119,7 @@ class DashboardView extends React.Component {
                         <Col xs={12} s={12} md={12}>
                             <Row center="xs">
                                 <DashboardPieChart
+                                    pieChartData={pieData}
                                     width={this.state.viewportWidth / 2}
                                     height={this.state.viewportWidth / 2}
                                 />
@@ -126,6 +127,7 @@ class DashboardView extends React.Component {
                         </Col>
                         <Col xs={12} s={12} md={12}>
                             <DashboardBarChart
+                                barChartData={barData}
                                 width={this.state.viewportWidth - 80}
                                 height={this.state.viewportWidth / 2 + 20}
                             />
@@ -141,6 +143,7 @@ class DashboardView extends React.Component {
                         <Col xs={12} s={12} md={12}>
                             <Row center="xs">
                                 <DashboardPieChart
+                                    pieChartData={pieData}
                                     width={this.state.viewportWidth - 80}
                                     height={this.state.viewportWidth - 80}
                                 />
@@ -148,6 +151,7 @@ class DashboardView extends React.Component {
                         </Col>
                         <Col xs={12} s={12} md={12}>
                             <DashboardBarChart
+                                barChartData={barData}
                                 width={this.state.viewportWidth - 80}
                                 height={this.state.viewportWidth / 2 + 20}
                             />
