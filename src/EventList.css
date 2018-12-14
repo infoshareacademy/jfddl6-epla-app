@@ -2,7 +2,7 @@
     display: flex;
     max-width: 100%;
     flex-wrap: wrap;
-    justify-content: space-around
+    justify-content: space-around;
 }
 
 .image {
@@ -35,8 +35,39 @@
     padding: 20px;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
     .list-container  {
-        flex-direction: column;
+        flex-wrap: wrap
+    }
+
+    .paper {
+        flex-wrap: wrap;
+        flex-basis: 200px;
+    }
+    .images {
+        flex-wrap: wrap;
+        align-content: center;
+        flex-shrink: inherit;
+
+    }
+}
+
+
+@media only screen and (max-width: 660px) {
+    .paper {
+        flex-wrap: wrap;
+        flex-basis: 200px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .image{
+        flex-basis: 100px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .paper {
+        align-items: center
     }
 }

@@ -40,13 +40,15 @@ const List = (props) => (
                 .map(event => {
                     return (
                         <Paper className='paper'>
-                            <Link to={`/single-event/${event.key}`} className='link'>
-                                {
-                                    <img src={mapImageSourceToCategory[event.category]} alt={event.category}
-                                        className='image'
-                                    />
-                                }
-                            </Link>
+                            <div className='images'>
+                                <Link to={`/single-event/${event.key}`} className='link'>
+                                    {
+                                        <img src={mapImageSourceToCategory[event.category]} alt={event.category}
+                                            className='image'
+                                        />
+                                    }
+                                </Link>
+                            </div>
                             <div
                                 style={{
                                     fontFamily: FontFamilyEpla,
