@@ -20,11 +20,8 @@ const imageStyle = {
     justifyContent: 'space-evenly',
 }
 
-
 const List = (props) => (
-
     <ul>
-
         {
             props.events
                 .filter(event => event.participants <= props.numberOfUsers)
@@ -83,22 +80,17 @@ const List = (props) => (
                                 <IconButton
                                     onClick={() => props.isFavourite(event)}
                                 >
-                                    {event.isFavourite ?
+                                    {Object.keys(props.favs || {}).includes(event.key) ?
                                         <ActionFavorite />
                                         :
                                         <ActionFavoriteBorder />
                                     }
                                 </IconButton>
-
                             </div>
-
-
                         </Paper>
                     )
                 })
-
         }
-
     </ul>
 )
 

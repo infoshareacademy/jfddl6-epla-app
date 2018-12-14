@@ -18,12 +18,6 @@ import {
 } from '../../state/eventListView'
 
 class EventListView extends React.Component {
-    state = {
-        filterText: '',
-        numberOfUsers: 150,
-        filterCategory: '',
-        data: []
-    }
 
     componentDidMount() {
         this.props._getEventListFromDbAsyncAction()
@@ -51,9 +45,8 @@ class EventListView extends React.Component {
                         filterText={this.props._filterText}
                         numberOfUsers={this.props._numberOfUsers}
                         isFavourite={this.props._toggleFavouriteAsyncAction}
+                        favs={this.props._favs}
                     />
-
-
                 </Paper>
             </div >
         )
@@ -63,6 +56,7 @@ class EventListView extends React.Component {
 
 const mapStateToProps = state => ({
     _data: state.favouritesView.data,
+    _favs: state.favouritesView.favs,
     _numberOfUsers: state.eventListView.numberOfUsers,
     _filterText: state.eventListView.filterText,
     _filterCategory: state.eventListView.filterCategory
