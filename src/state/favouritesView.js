@@ -46,7 +46,7 @@ export const stopListeningFavsAsyncAction = () => (dispatch, getState) => {
 
 export const toggleFavouriteAsyncAction = (event) => (dispatch, getState) => {
     const uuid = getState().auth.user.uid
-    const isFav = getState().favouritesView.favs[event.key]
+    const isFav = getState().favouritesView.favs ? getState().favouritesView.favs[event.key] : null
 
     database.ref(`/users/${uuid}/favourites`).child(event.key)
         .set(isFav ? null : true)
