@@ -44,7 +44,7 @@ class FavouritesView extends React.Component {
                         style={styles.gridList}
                     >
                         <Subheader>Favourites List</Subheader>
-                        {this.props._data.filter(event => Object.keys(this.props.favs || {}).includes(event.key) ? true : false)
+                        {this.props._data.filter(event => Object.keys(this.props._favs || {}).includes(event.key) ? true : false)
                             .map((event) => (
                                 <Link to={`/single-event/${event.key}`} key={event.key}>
                                     <GridTile
