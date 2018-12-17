@@ -5,8 +5,7 @@ import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
-import '../../EventList.css'
-// import {List, ListItem} from 'material-ui/List';
+import './EventList.css'
 
 const mapImageSourceToCategory = {
     music: "https://images.pexels.com/photos/952437/pexels-photo-952437.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
@@ -39,7 +38,10 @@ const List = (props) => (
                 ))
                 .map(event => {
                     return (
-                        <Paper className='paper'>
+                        <Paper
+                            className='paper'
+                            key={event.key}
+                        >
                             <div className='images'>
                                 <Link to={`/single-event/${event.key}`} className='link'>
                                     {
@@ -69,7 +71,7 @@ const List = (props) => (
                                 <IconButton
                                     onClick={() => props.isFavourite(event)}
                                 >
-                                    {event.isFavourite ?
+                                    {Object.keys(props.favs || {}).includes(event.key) ?
                                         <ActionFavorite />
                                         :
                                         <ActionFavoriteBorder />

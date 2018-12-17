@@ -5,133 +5,108 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import DatePicker from 'material-ui/DatePicker'
 import Paper from 'material-ui/Paper'
+import { connect } from 'react-redux'
 
-
-import { database } from '../../firebaseConfig'
+import {
+    addToFirebaseAsyncAction,
+    handleAddEventClick,
+    eventNameChangeAction,
+    dateChangeAction,
+    categorySelectChange,
+    cityChangeAction,
+    streetChangeAction
+} from '../../state/addEventFormView'
 
 const style = {
     margin: 5,
     width: '98%'
 }
 
-class AddEventForm extends React.Component {
-
-    state = {
-        eventName: '',
-        category: '',
-        date: '',
-        city: '',
-        street: '',
-        isFavourite: false
-    }
-
-    getRandomParticipantsNumber = () =>
-        Math.round(Math.random() * 100) + 50
-
-    handleAddEventClick = () => {
-        if (this.state.eventName !== '' && this.state.category !== '' && this.state.date !== '') {
-            this.props.toggleNotification('Event added')
-            this.addToFirebase()
-        }
-        else {
-            this.props.toggleNotification('Enter event name, category and date.')
-        }
-    }
-
-    addToFirebase = () => {
-        database.ref('/events').push({
-            ...this.state,
-            date: this.ourDateFormatter(this.state.date),
-            participants: this.getRandomParticipantsNumber()
-        })
-        this.setState({
-            eventName: '',
-            category: '',
-            date: '',
-            city: '',
-            street: ''
-        })
-    }
-
-    ourDateFormatter = (date) => {
-        return date.getDate() + ' -' + (date.getMonth()+1) + ' -' + date.getFullYear()
-    }
-
-    handleDateChange = (event, date) => {
-        this.setState({
-            date: date
-        })
-    }
-
-    render() {
-        return (
-            <div
-            style={{
-                width: '100%',
-                margin: '12',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}
-            >
-            <Paper
+const AddEventForm = props => (
+    <div
+        style={{
+            width: '100%',
+            margin: '12',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }}
+    >
+        <Paper
             style={{
                 width: '90%'
             }}
+        >
+            <TextField
+                type="text"
+                floatingLabelText="Enter event name"
+                value={props._eventName}
+                onChange={props._eventNameChangeAction}
+                style={style}
+            />
+            <SelectField
+                floatingLabelText="Enter event category"
+                value={props._category}
+                onChange={props._categorySelectChange}
+                style={style}
             >
-                <TextField
-                    type="text"
-                    floatingLabelText="Enter event name"
-                    value={this.state.eventName}
-                    onChange={(event, newVal) => this.setState({ eventName: newVal })}
-                    style={style}
-                />
-                <SelectField
-                    floatingLabelText="Enter event category"
-                    value={this.state.category}
-                    onChange={(event, index, newValue) => this.setState({ category: newValue })}
-                    style={style}
-                >
-                    <MenuItem value={''} primaryText="" />
-                    <MenuItem value={'Music'} primaryText="Music" />
-                    <MenuItem value={'Sport'} primaryText="Sport" />
-                    <MenuItem value={'Cultural'} primaryText="Cultural" />
-                    <MenuItem value={'Religious'} primaryText="Religious" />
-                </SelectField>
-                <DatePicker
-                    hintText="Enter event date"
-                    value={this.state.date}
-                    onChange={this.handleDateChange}
-                    textFieldStyle={{
-                        width: '98%',
-                        margin: 5
-                    }}
-                />
-                <TextField
-                    type="text"
-                    floatingLabelText="Enter city"
-                    value={this.state.city}
-                    onChange={(event, newVal) => this.setState({ city: newVal })}
-                    style={style}
-                />
-                <TextField
-                    type="text"
-                    floatingLabelText="Enter street name"
-                    value={this.state.street}
-                    onChange={(event, newVal) => this.setState({ street: newVal })}
-                    style={style}
-                />
-                <RaisedButton
-                    label="Add event"
-                    primary={true}
-                    style={style}
-                    onClick={this.handleAddEventClick}
-                />
-            </Paper>
-            </div>
-        )
-    }
-}
+                <MenuItem value={''} primaryText="" />
+                <MenuItem value={'music'} primaryText="music" />
+                <MenuItem value={'sport'} primaryText="sport" />
+                <MenuItem value={'cultural'} primaryText="cultural" />
+                <MenuItem value={'religious'} primaryText="religious" />
+            </SelectField>
+            <DatePicker
+                hintText="Enter event date"
+                value={props._date}
+                onChange={props._dateChangeAction}
+                textFieldStyle={{
+                    width: '98%',
+                    margin: 5
+                }}
+            />
+            <TextField
+                type="text"
+                floatingLabelText="Enter city"
+                value={props._city}
+                onChange={props._cityChangeAction}
+                style={style}
+            />
+            <TextField
+                type="text"
+                floatingLabelText="Enter street name"
+                value={props._street}
+                onChange={props._streetChangeAction}
+                style={style}
+            />
+            <RaisedButton
+                label="Add event"
+                primary={true}
+                style={style}
+                onClick={props._handleAddEventClick}
+            />
+        </Paper>
+    </div>
+)
 
+const mapStateToProps = state => ({
+    _eventName: state.addEventFormView.eventName,
+    _category: state.addEventFormView.category,
+    _date: state.addEventFormView.date,
+    _city: state.addEventFormView.city,
+    _street: state.addEventFormView.street,
+    _isFavourite: state.addEventFormView.isFavourite,
+    _photo: state.addEventFormView.photo,
+})
 
-export default AddEventForm
+const mapDispatchToProps = dispatch => ({
+    _addToFirebaseAsyncAction: () => dispatch(addToFirebaseAsyncAction()),
+    _handleAddEventClick: () => dispatch(handleAddEventClick()),
+    _dateChangeAction: (event, date) => dispatch(dateChangeAction(event, date)),
+    _categorySelectChange: (event, index, text) => dispatch(categorySelectChange(event, index, text)),
+    _streetChangeAction: (event, text) => dispatch(streetChangeAction(event, text)),
+    _cityChangeAction: (event, text) => dispatch(cityChangeAction(event, text)),
+    _eventNameChangeAction: (event, text) => dispatch(eventNameChangeAction(event, text))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventForm)

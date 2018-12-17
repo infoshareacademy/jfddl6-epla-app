@@ -9,69 +9,66 @@ import DashboardView from './views/DashboardView/DashboardView'
 import EventListView from './views/EventListView/EventListView'
 import SingleEventView from './views/SingleEventView/SingleEventView'
 import FavouritesView from './views/FavouritesView/FavouritesView'
-class App extends React.Component {
+import './App.css'
+import Auth from './Auth/Auth'
 
-  state = {
-    isNotificationOpen: false,
-    notificationMessage: ''
-  }
-
-  toggleNotification = (message) => {
-    this.setState({
-      isNotificationOpen: !this.state.isNotificationOpen,
-      notificationMessage: message || ''
-    })
-  }
-
-  render() {
-    return (
+const App = props => (
+  <Auth>
+    <Router>
       <div>
-        <Router>
-          <div>
-            <div>
-              <Navigation
-              title="ePla"
+        <div>
+          <Navigation
+            title="ePla"
             keyChildProp="to">
-                <Link to='/'>
-                  <MenuItem>
-                    Home
+            <Link
+              to='/'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Home'
+              >
               </MenuItem>
-                </Link>
-                <Link to='/event-list'>
-                  <MenuItem>
-                    Event List
+            </Link>
+            <Link
+              to='/event-list'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Event List'
+              >
               </MenuItem>
-                </Link>
-                <Link to='/add-event-form'>
-                  <MenuItem>
-                    Add Event
+            </Link>
+            <Link
+              to='/add-event-form'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Add Event'
+              >
               </MenuItem>
-                </Link>
-                <Link to='/favourites'>
-                  <MenuItem>
-                    Favourites List
+            </Link>
+            <Link
+              to='/favourites'
+              className='link'
+            >
+              <MenuItem
+                primaryText='Favourites List'
+              >
               </MenuItem>
-                </Link>
-              </Navigation>
-            </div>
-            <div>
-              <Route path="/" exact={true} component={DashboardView} />
-              <Route path="/event-list" component={EventListView} />
-              <Route path="/single-event/:id" component={SingleEventView} />
-              <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
-              <Route path="/favourites" component={FavouritesView} />
-            </div>
-          </div>
-        </Router>
-
-        <Notification
-          isNotificationOpen={this.state.isNotificationOpen}
-          handleRequestClose={this.toggleNotification}
-          notificationMessage={this.state.notificationMessage}
-        />
-
+            </Link>
+          </Navigation>
+        </div>
+        <div>
+          <Route path="/" exact={true} component={DashboardView} />
+          <Route path="/event-list" component={EventListView} />
+          <Route path="/single-event/:id" component={SingleEventView} />
+          <Route path="/add-event-form" component={AddEventForm} />
+          <Route path="/favourites" component={FavouritesView} />
+        </div>
       </div>
-    )
-  }
-}
+    </Router>
+
+    <Notification />
+  </Auth>
+)
 export default App

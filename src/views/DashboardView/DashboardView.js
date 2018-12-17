@@ -1,12 +1,14 @@
 import React from 'react'
 import DashboardPieChart from './Dashboard-components/PieChart'
 import DashboardBarChart from './Dashboard-components/BarChart'
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import { connect } from 'react-redux'
 
 class DashboardView extends React.Component {
     state = {
         viewportWidth: window.innerWidth
     }
+
 
     componentDidMount() {
         window.addEventListener(
@@ -20,6 +22,73 @@ class DashboardView extends React.Component {
     })
 
     render() {
+        const now = new Date()
+        const todayMidnightTimestamp = now.getTime()
+            - now.getHours() * 60 * 60 * 1000
+            - now.getMinutes() * 60 * 1000
+            - now.getSeconds() * 1000
+            - now.getMilliseconds()
+
+        const loginsData = this.props._loginsData && this.props._loginsData.map(timestamp => timestamp.timestamp)
+
+        const midnightTimestamp = {
+            day0: todayMidnightTimestamp,
+            day1: todayMidnightTimestamp - 24 * 60 * 60 * 1000,
+            day2: todayMidnightTimestamp - 2 * 24 * 60 * 60 * 1000,
+            day3: todayMidnightTimestamp - 3 * 24 * 60 * 60 * 1000,
+            day4: todayMidnightTimestamp - 4 * 24 * 60 * 60 * 1000,
+            day5: todayMidnightTimestamp - 5 * 24 * 60 * 60 * 1000,
+            day6: todayMidnightTimestamp - 6 * 24 * 60 * 60 * 1000
+        }
+
+        const loginsPerDay = {
+            day0: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day0).length,
+            day1: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day1 && timestamp < midnightTimestamp.day0).length,
+            day2: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day2 && timestamp < midnightTimestamp.day1).length,
+            day3: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day3 && timestamp < midnightTimestamp.day2).length,
+            day4: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day4 && timestamp < midnightTimestamp.day3).length,
+            day5: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day5 && timestamp < midnightTimestamp.day4).length,
+            day6: loginsData && loginsData.filter(timestamp => timestamp >= midnightTimestamp.day6 && timestamp < midnightTimestamp.day5).length
+        }
+
+        const barData = Object.values(loginsPerDay).map((loginsNumber, index) => ({
+            day: 0 - index,
+            participants: loginsNumber,
+            fill: "rgba(229, 80, 57, 1)",
+            label: false
+        }))
+
+        const eventsData = this.props._data
+
+        const musicEventsNumber = eventsData.filter(e => e.category === 'music').length
+        const sportsEventsNumber = eventsData.filter(e => e.category === 'sport').length
+        const culturalEventsNumber = eventsData.filter(e => e.category === 'cultural').length
+        const religiousEventsNumber = eventsData.filter(e => e.category === 'religious').length
+
+
+        const pieData = [
+            {
+                name: 'sport',
+                value: sportsEventsNumber,
+                fill: "rgba(183, 21, 64, 0.8)"
+            },
+            {
+                name: 'music',
+                value: musicEventsNumber,
+                fill: "rgba(10, 61, 98, 0.8)"
+            },
+            {
+                name: 'cultural',
+                value: culturalEventsNumber,
+                fill: "rgba(246, 185, 59, 0.8)"
+            },
+            {
+                name: 'religious',
+                value: religiousEventsNumber,
+                fill: "rgba(7, 153, 146, 0.8)"
+            },
+        ]
+
         if (window.innerWidth > 960) {
             return (
 
@@ -27,12 +96,14 @@ class DashboardView extends React.Component {
                     <Row>
                         <Col xs={12} s={6} md={6}>
                             <DashboardPieChart
+                                pieChartData={pieData}
                                 width={this.state.viewportWidth / 2 - 50}
                                 height={this.state.viewportWidth / 2 - 80}
                             />
                         </Col>
                         <Col xs={12} s={6} md={6}>
                             <DashboardBarChart
+                                barChartData={barData}
                                 width={this.state.viewportWidth / 2 - 50}
                                 height={this.state.viewportWidth / 2 - 80}
                             />
@@ -48,6 +119,7 @@ class DashboardView extends React.Component {
                         <Col xs={12} s={12} md={12}>
                             <Row center="xs">
                                 <DashboardPieChart
+                                    pieChartData={pieData}
                                     width={this.state.viewportWidth / 2}
                                     height={this.state.viewportWidth / 2}
                                 />
@@ -55,6 +127,7 @@ class DashboardView extends React.Component {
                         </Col>
                         <Col xs={12} s={12} md={12}>
                             <DashboardBarChart
+                                barChartData={barData}
                                 width={this.state.viewportWidth - 80}
                                 height={this.state.viewportWidth / 2 + 20}
                             />
@@ -70,6 +143,7 @@ class DashboardView extends React.Component {
                         <Col xs={12} s={12} md={12}>
                             <Row center="xs">
                                 <DashboardPieChart
+                                    pieChartData={pieData}
                                     width={this.state.viewportWidth - 80}
                                     height={this.state.viewportWidth - 80}
                                 />
@@ -77,6 +151,7 @@ class DashboardView extends React.Component {
                         </Col>
                         <Col xs={12} s={12} md={12}>
                             <DashboardBarChart
+                                barChartData={barData}
                                 width={this.state.viewportWidth - 80}
                                 height={this.state.viewportWidth / 2 + 20}
                             />
@@ -95,4 +170,9 @@ class DashboardView extends React.Component {
     }
 }
 
-export default DashboardView
+const mapStateToProps = state => ({
+    _loginsData: state.loginsTimestamps.loginsData,
+    _data: state.favouritesView.data
+})
+
+export default connect(mapStateToProps)(DashboardView)

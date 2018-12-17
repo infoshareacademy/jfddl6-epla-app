@@ -1,71 +1,69 @@
 import React from 'react'
+
 import List from './List'
 import SearchForm from './SearchForm'
-import '../../EventList.css'
 
+import { connect } from 'react-redux'
+import {
+    getEventListFromDbAsyncAction,
+    stopListeningToDbAsyncAction,
+    toggleFavouriteAsyncAction
+} from '../../state/favouritesView'
+import {
+    filterTextChangeAction,
+    usersNumberChangeAction,
+    eventsFilterCategoryChangeAction
+} from '../../state/eventListView'
 
 class EventListView extends React.Component {
-    state = {
-        filterText: '',
-        numberOfUsers: 150,
-        filterCategory: '',
-        events: [],
-        cols: 6,
-        viewportWidth: window.innerWidth
-    }
-
-
-    onFilteredTextChangeHandler = (e, value) => this.setState({ filterText: value })
-
-    handleUsersChange = (e, value) => this.setState({ numberOfUsers: value })
-
-    handleEventsFilterCategoryChange = (e, key, value) => this.setState({ filterCategory: value })
-
-    isFavourite = (event) => {
-        fetch(`https:epla-app.firebaseio.com/events/${event.key}.json`, {
-            method: 'PATCH',
-            body: JSON.stringify({ isFavourite: !event.isFavourite })
-        }).then(() => this.loadData())
-    }
 
     componentDidMount() {
-        this.loadData()
+        this.props._getEventListFromDbAsyncAction()
     }
 
-    loadData = () => {
-        fetch('https://epla-app.firebaseio.com/events.json')
-            .then(response => response.json())
-            .then(data => {
-                const events = Object.entries(data).map(([key, value]) => ({
-                    ...value,
-                    key
-                }))
-                this.setState({ events: events })
-            })
+    componentWillUnmount() {
+        this.props._stopListeningToDbAsyncAction()
     }
 
     render() {
         return (
             <div>
                 <SearchForm
-                    onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
-                    handleUsersChange={this.handleUsersChange}
-                    handleEventsFilterCategoryChange={this.handleEventsFilterCategoryChange}
-                    filterCategory={this.state.filterCategory}
-                    filterText={this.state.filterText}
-                    numberOfUsers={this.state.numberOfUsers}
+                    onFilteredTextChangeHandler={this.props._filterTextChangeAction}
+                    handleUsersChange={this.props._usersNumberChangeAction}
+                    handleEventsFilterCategoryChange={this.props._eventsFilterCategoryChangeAction}
+                    filterCategory={this.props._filterCategory}
+                    filterText={this.props._filterText}
+                    numberOfUsers={this.props._numberOfUsers}
                 />
                 <List
-
-                    events={this.state.events}
-                    filterCategory={this.state.filterCategory}
-                    filterText={this.state.filterText}
-                    numberOfUsers={this.state.numberOfUsers}
-                    isFavourite={this.isFavourite}
+                    events={this.props._data}
+                    filterCategory={this.props._filterCategory}
+                    filterText={this.props._filterText}
+                    numberOfUsers={this.props._numberOfUsers}
+                    isFavourite={this.props._toggleFavouriteAsyncAction}
+                    favs={this.props._favs}
                 />
             </div >
         )
     }
 }
 
-export default EventListView
+const mapStateToProps = state => ({
+    _data: state.favouritesView.data,
+    _favs: state.favouritesView.favs,
+    _numberOfUsers: state.eventListView.numberOfUsers,
+    _filterText: state.eventListView.filterText,
+    _filterCategory: state.eventListView.filterCategory
+})
+
+const mapDispatchToProps = dispatch => ({
+    _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
+    _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
+    _toggleFavouriteAsyncAction: (event) => dispatch(toggleFavouriteAsyncAction(event)),
+    _filterTextChangeAction: (event, val) => dispatch(filterTextChangeAction(val)),
+    _usersNumberChangeAction: (event, val) => dispatch(usersNumberChangeAction(val)),
+    _eventsFilterCategoryChangeAction: (event, i, val) => dispatch(eventsFilterCategoryChangeAction(val))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventListView)
