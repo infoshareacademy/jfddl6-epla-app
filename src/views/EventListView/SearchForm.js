@@ -10,7 +10,7 @@ import { white } from 'material-ui/styles/colors';
 const PaperStyle = {
     margin: 15,
     padding: 10,
-    backgroundColor:white
+    backgroundColor: white
 }
 
 const DropDownMenuStyle = {
@@ -25,7 +25,11 @@ const SearchForm = (props) => (
     <Paper
         style={PaperStyle}
     >
-        <div>
+        <div
+            style={{
+                padding: 30
+            }}
+        >
             <TextField
                 type="text"
                 fullWidth={true}
@@ -51,7 +55,9 @@ const SearchForm = (props) => (
             max={150}
             style={{
                 fontSize: 20,
-                textAlign: "center"
+                textAlign: "center",
+                width: '94%',
+                margin: '0 auto'
             }}
 
         />
@@ -79,8 +85,8 @@ const SearchForm = (props) => (
                 menuStyle={{
                     textAlign: "center",
                 }}
-                menuItemStyle={{ fontFamily: FontFamilyEpla}}
-                selectedMenuItemStyle={{ color: red800}}
+                menuItemStyle={{ fontFamily: FontFamilyEpla }}
+                selectedMenuItemStyle={{ color: red800 }}
                 value={props.filterCategory}
             >
                 <MenuItem value={''} primaryText="All" />

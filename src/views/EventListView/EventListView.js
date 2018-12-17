@@ -2,15 +2,13 @@ import React from 'react'
 
 import List from './List'
 import SearchForm from './SearchForm'
-import Paper from 'material-ui/Paper'
-import { connect } from 'react-redux'
 
+import { connect } from 'react-redux'
 import {
     getEventListFromDbAsyncAction,
     stopListeningToDbAsyncAction,
     toggleFavouriteAsyncAction
 } from '../../state/favouritesView'
-
 import {
     filterTextChangeAction,
     usersNumberChangeAction,
@@ -18,14 +16,6 @@ import {
 } from '../../state/eventListView'
 
 class EventListView extends React.Component {
-
-    componentDidMount() {
-        this.props._getEventListFromDbAsyncAction()
-    }
-
-    componentWillUnmount() {
-        this.props._stopListeningToDbAsyncAction()
-    }
 
     render() {
         return (
@@ -38,20 +28,17 @@ class EventListView extends React.Component {
                     filterText={this.props._filterText}
                     numberOfUsers={this.props._numberOfUsers}
                 />
-                <Paper >
-                    <List
-                        events={this.props._data}
-                        filterCategory={this.props._filterCategory}
-                        filterText={this.props._filterText}
-                        numberOfUsers={this.props._numberOfUsers}
-                        isFavourite={this.props._toggleFavouriteAsyncAction}
-                        favs={this.props._favs}
-                    />
-                </Paper>
+                <List
+                    events={this.props._data}
+                    filterCategory={this.props._filterCategory}
+                    filterText={this.props._filterText}
+                    numberOfUsers={this.props._numberOfUsers}
+                    isFavourite={this.props._toggleFavouriteAsyncAction}
+                    favs={this.props._favs}
+                />
             </div >
         )
     }
-
 }
 
 const mapStateToProps = state => ({

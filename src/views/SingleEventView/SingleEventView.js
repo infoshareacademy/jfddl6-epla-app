@@ -21,11 +21,12 @@ const mapImageSourceToCategory = {
 }
 
 const imageStyle = {
-    width: 500,
+    maxWidth: 500,
     borderRadius: 50,
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
-    marginTop: '3vh'
+    marginTop: '3vh',
+    width: '100%'
 }
 
 class SingleEventView extends React.Component {
@@ -36,15 +37,6 @@ class SingleEventView extends React.Component {
         this.state = {
             viewportWidth: window.innerWidth,
         }
-    }
-
-    componentDidMount() {
-        this.props._getEventListFromDbAsyncAction()
-    }
-
-
-    componentWillUnmount() {
-        this.props._stopListeningToDbAsyncAction()
     }
 
     render() {
