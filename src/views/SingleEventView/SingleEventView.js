@@ -1,6 +1,5 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
-import { database } from '../../firebaseConfig'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import IconButton from 'material-ui/IconButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
@@ -48,13 +47,6 @@ class SingleEventView extends React.Component {
         this.props._stopListeningToDbAsyncAction()
     }
 
-    isFavourite = event => {
-        database.ref(`/events`).child(this.props.match.params.id)
-            .update({
-                isFavourite: !event.isFavourite
-            })
-    }
-
     render() {
         const event = this.props._data.find(element => element.key === this.props.match.params.id)
         return (
@@ -72,7 +64,7 @@ class SingleEventView extends React.Component {
                             <IconButton
                                     onClick={() => event && this.props._toggleFavouriteAsyncAction(event)}
                                 >
-                                    {event && event.isFavourite ?
+                                    {event && Object.keys(this.props._favs || {}).includes(event.key) ?
                                         <ActionFavorite />
                                         :
                                         <ActionFavoriteBorder />
@@ -93,7 +85,8 @@ class SingleEventView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    _data: state.favouritesView.data
+    _data: state.favouritesView.data,
+    _favs: state.favouritesView.favs
 })
 
 const mapDispatchToProps = dispatch => ({

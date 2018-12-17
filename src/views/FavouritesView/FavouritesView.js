@@ -34,14 +34,14 @@ class FavouritesView extends React.Component {
                         style={styles.gridList}
                     >
                         <Subheader>Favourites List</Subheader>
-                        {this.props._data.filter(event => event.isFavourite === true)
+                        {this.props._data.filter(event => Object.keys(this.props._favs || {}).includes(event.key) ? true : false)
                             .map((event) => (
                                 <Link to={`/single-event/${event.key}`} key={event.key}>
                                     <GridTile
                                         title={event.eventName}
                                         subtitle={<span>Category: <b>{event.category}</b></span>}
                                         actionIcon={<IconButton
-                                            onClick={() => this.props._toggleFavouriteAsyncAction(event)}
+                                            onClick={(e) => { this.props._toggleFavouriteAsyncAction(event) }}
                                         >
                                             <StarBorder color="white" />
                                         </IconButton>}
@@ -67,7 +67,8 @@ class FavouritesView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    _data: state.favouritesView.data
+    _data: state.favouritesView.data,
+    _favs: state.favouritesView.favs
 })
 
 const mapDispatchToProps = dispatch => ({

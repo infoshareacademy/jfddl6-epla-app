@@ -10,7 +10,20 @@ const LoginView = (props) => (
       padding: 20
     }}
   >
-    <h2>Log in!</h2>
+    <div
+      style={{
+        textAlign: 'center'
+      }}
+    >
+      <p>Example login and password:</p>
+      <p>email: example@example.com</p>
+      <p>password: example</p>
+    </div>
+    <h2
+          style={{
+            textAlign: 'center'
+          }}
+    >Log in!</h2>
     <TextField
       name="email"
       type="email"
@@ -34,7 +47,7 @@ const LoginView = (props) => (
       onClick={props.onLogInClick}
       fullWidth={true}
     />
-     <RaisedButton
+    <RaisedButton
       style={{ margin: '5px 0' }}
       label={'Reset your password'}
       primary={true}
