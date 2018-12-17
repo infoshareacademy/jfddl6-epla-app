@@ -1,4 +1,6 @@
 import { auth, database, googleProvider } from '../firebaseConfig'
+import {startSyncLoginsTimestampAsyncAction, stopSyncLoginsTimestampAsyncAction} from './loginsTimestamps'
+import {getEventListFromDbAsyncAction, stopListeningToDbAsyncAction} from './favouritesView'
 
 import { startListeningFavsAsyncAction, stopListeningFavsAsyncAction } from './favouritesView'
 
@@ -14,13 +16,20 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
                 dispatch(logInAction(user))
                 dispatch(saveLoginTimestampAsyncAction())
                 dispatch(startListeningFavsAsyncAction())
+                dispatch(startSyncLoginsTimestampAsyncAction())
+                dispatch(getEventListFromDbAsyncAction())
+
             } else {
                 dispatch(stopListeningFavsAsyncAction())
                 dispatch(logOutAction())
+                dispatch(stopSyncLoginsTimestampAsyncAction())
+                dispatch(stopListeningToDbAsyncAction())
             }
         }
     )
 }
+
+
 
 export const onLogOutAsyncAction = () => (dispatch, getState) => {
     auth.signOut()

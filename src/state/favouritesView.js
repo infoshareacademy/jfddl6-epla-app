@@ -20,7 +20,6 @@ export const getEventListFromDbAsyncAction = () => (dispatch, getState) => {
             }))
 
             dispatch(saveEventListAction(events))
-
         }
     )
 }
