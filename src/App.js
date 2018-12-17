@@ -62,7 +62,7 @@ const App = props => (
           <Route path="/" exact={true} component={DashboardView} />
           <Route path="/event-list" component={EventListView} />
           <Route path="/single-event/:id" component={SingleEventView} />
-          <Route path="/add-event-form" component={() => <AddEventForm toggleNotification={this.toggleNotification} />} />
+          <Route path="/add-event-form" component={AddEventForm} />
           <Route path="/favourites" component={FavouritesView} />
         </div>
       </div>

@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {
-    getEventListFromDbAsyncAction,
-    stopListeningToDbAsyncAction,
     toggleFavouriteAsyncAction
 } from '../../state/favouritesView'
 
@@ -26,14 +24,6 @@ const styles = {
 }
 
 class FavouritesView extends React.Component {
-
-    componentDidMount() {
-        this.props._getEventListFromDbAsyncAction()
-    }
-
-    componentWillUnmount() {
-        this.props._stopListeningToDbAsyncAction()
-    }
 
     render() {
         return (
@@ -81,8 +71,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    _getEventListFromDbAsyncAction: () => dispatch(getEventListFromDbAsyncAction()),
-    _stopListeningToDbAsyncAction: () => dispatch(stopListeningToDbAsyncAction()),
     _toggleFavouriteAsyncAction: (event) => dispatch(toggleFavouriteAsyncAction(event))
 })
 
