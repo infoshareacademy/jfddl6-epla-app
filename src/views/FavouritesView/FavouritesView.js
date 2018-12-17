@@ -51,7 +51,7 @@ class FavouritesView extends React.Component {
                                         title={event.eventName}
                                         subtitle={<span>Category: <b>{event.category}</b></span>}
                                         actionIcon={<IconButton
-                                            onClick={() => this.props._toggleFavouriteAsyncAction(event)}
+                                            onClick={(e) => { this.props._toggleFavouriteAsyncAction(event) }}
                                         >
                                             <StarBorder color="white" />
                                         </IconButton>}

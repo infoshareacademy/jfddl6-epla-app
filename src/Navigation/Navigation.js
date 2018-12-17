@@ -2,6 +2,9 @@ import React from 'react'
 
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
+import { FlatButton } from 'material-ui'
+import { onLogOutAsyncAction } from '../state/auth'
+import { store } from '../store'
 
 class Navigation extends React.Component {
     state = {
@@ -16,6 +19,12 @@ class Navigation extends React.Component {
                 <AppBar
                     title={this.props.title}
                     onLeftIconButtonClick={this.toggleDrawer}
+                    iconElementRight={
+                        <FlatButton
+                            label="Log Out"
+                            onClick={() => store.dispatch(onLogOutAsyncAction())}
+                        />
+                    }
                 />
 
                 <Drawer

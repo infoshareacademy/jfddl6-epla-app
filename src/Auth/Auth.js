@@ -1,6 +1,4 @@
 import React from 'react'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-
 
 import LoginView from '../views/LoginView/LoginView'
 
@@ -25,22 +23,7 @@ class Auth extends React.Component {
   render() {
     return (
       this.props._isUserLoggedIn ?
-        <div>
-          <FloatingActionButton
-            style={{
-              position: 'fixed',
-              top: 10,
-              right: 10,
-              zIndex: 9999,
-              color: 'white'
-            }}
-            secondary={true}
-            onClick={this.props._onLogOutAsyncAction}
-          >
-            X
-          </FloatingActionButton>
-          {this.props.children}
-        </div>
+        this.props.children
         :
         <LoginView
           email={this.props._email}
@@ -49,7 +32,7 @@ class Auth extends React.Component {
           onPasswordChangeHandler={this.props._passwordChangeAction}
           onLogInClick={this.props._logInAsyncAction}
           onLogInByGoogleClick={this.props._onLogInByGoogleClickAsyncAction}
-          resetPasswordHandler = {this.props._resetPasswordHandler}
+          resetPasswordHandler={this.props._resetPasswordHandler}
         />
     )
   }
@@ -66,7 +49,7 @@ const mapDispatchToProps = dispatch => ({
   _onLogOutAsyncAction: () => dispatch(onLogOutAsyncAction()),
   _onLogInByGoogleClickAsyncAction: () => dispatch(onLogInByGoogleClickAsyncAction()),
   _logInAsyncAction: () => dispatch(logInAsyncAction()),
-  _emailChangeAction: (event)=> dispatch(emailChangeAction(event.target.value)),
+  _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
   _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
   _resetPasswordHandler: () => dispatch(resetPasswordHandler())
 })
