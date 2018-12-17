@@ -17,14 +17,6 @@ import {
 
 class EventListView extends React.Component {
 
-    componentDidMount() {
-        this.props._getEventListFromDbAsyncAction()
-    }
-
-    componentWillUnmount() {
-        this.props._stopListeningToDbAsyncAction()
-    }
-
     render() {
         return (
             <div>

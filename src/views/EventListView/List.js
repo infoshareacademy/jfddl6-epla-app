@@ -5,6 +5,7 @@ import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
+import '../../App.css'
 import './EventList.css'
 
 const mapImageSourceToCategory = {
@@ -39,14 +40,14 @@ const List = (props) => (
                 .map(event => {
                     return (
                         <Paper
-                            className='paper'
+                            className='list-paper'
                             key={event.key}
                         >
-                            <div className='images'>
+                            <div className='list-images'>
                                 <Link to={`/single-event/${event.key}`} className='link'>
                                     {
                                         <img src={mapImageSourceToCategory[event.category]} alt={event.category}
-                                            className='image'
+                                            className='list-image'
                                         />
                                     }
                                 </Link>
