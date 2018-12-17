@@ -46,7 +46,7 @@ const DashboardBarChart = (props) => (
     <h2
       style={{ textAlign: 'center' }}
     >
-    Logged in users
+    Logged in users 
     </h2>
     <BarChart width={props.width} height={props.height} data={props.barChartData || barChartData}>
       <CartesianGrid strokeDasharray="3 3" />
